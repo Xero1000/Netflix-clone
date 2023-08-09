@@ -7,5 +7,4 @@ const useTrending = () => useQuery({
         queryFn: () => apiClient.get<FetchResponseData>("/trending/movie/week").then((res) => res.data),
     });
 
-
 export default useTrending
