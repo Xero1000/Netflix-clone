@@ -1,15 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
 
-export interface Movie {
-  id: number;
-  title: string;
-  poster_path: string;
-}
-
-export interface FetchResponseData<T> {
-  results: T[];
-}
-
 const axiosInstance = axios.create({
     baseURL: "https://api.themoviedb.org/3/",
     params: {
@@ -26,7 +16,7 @@ class APIClient<T> {
 
   getAll = (config?: AxiosRequestConfig) => {
     return axiosInstance
-      .get<FetchResponseData<T>>(this.endpoint, config)
+      .get<T>(this.endpoint, config)
       .then(res => res.data)
   }
 }

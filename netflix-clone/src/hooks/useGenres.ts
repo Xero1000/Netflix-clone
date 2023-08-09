@@ -1,12 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import APIClient from "../services/apiClient"
+import { FetchResponseGenres } from "../entities/FetchResponseGenres";
 
-interface Genre {
-    id: number;
-    name: string;
-}
-
-const apiClient = new APIClient<Genre>("/genre/movie/list")
+const apiClient = new APIClient<FetchResponseGenres>("/genre/movie/list")
 
 const useGenres = () => useQuery({
     queryKey:["genres"],
