@@ -6,14 +6,30 @@ export interface Movie {
   poster_path: string;
 }
 
-export interface FetchResponseData {
-  results: Movie[];
+export interface FetchResponseData<T> {
+  results: T[];
 }
 
-export default axios.create({
+const axiosInstance = axios.create({
     baseURL: "https://api.themoviedb.org/3/",
     params: {
         api_key: "5054016756784fdb1c14d5a803573027"
     }
 })
+
+class APIClient<T> {
+  endpoint: string
+
+  constructor(endpoint: string) {
+    this.endpoint = endpoint
+  }
+
+  getAll = () => {
+    return axiosInstance
+      .get<FetchResponseData<T>>(this.endpoint)
+      .then(res => res.data)
+  }
+}
+
+export default APIClient
 
