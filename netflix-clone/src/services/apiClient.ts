@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 export interface Movie {
   id: number;
@@ -24,9 +24,9 @@ class APIClient<T> {
     this.endpoint = endpoint
   }
 
-  getAll = () => {
+  getAll = (config?: AxiosRequestConfig) => {
     return axiosInstance
-      .get<FetchResponseData<T>>(this.endpoint)
+      .get<FetchResponseData<T>>(this.endpoint, config)
       .then(res => res.data)
   }
 }
