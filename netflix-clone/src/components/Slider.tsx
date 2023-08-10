@@ -2,10 +2,17 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Heading, Image, Spinner, Text } from '@chakra-ui/react';
 import getFullPosterPath from '../utilities/getFullPosterPath';
-import useTrending from "../hooks/useTrending";
+import useMovies from '../hooks/useMovies';
 
-const Slider = () => {
-  const { data, isLoading, error } = useTrending()
+interface Props {
+  label: string
+  endpoint: string
+  genreId?: number
+}
+
+const Slider = ({ label, endpoint, genreId }: Props) => {
+
+  const { data, isLoading, error } = useMovies(label, endpoint, genreId)
 
   const responsive = {
     "2xl": {
@@ -35,12 +42,12 @@ const Slider = () => {
     }
   };
 
-  if (isLoading) return <Spinner />
   if (error) return <Text>{error.message}</Text>
+  if (isLoading) return <Spinner />
 
   return (
     <>
-      <Heading py={2}>Trending</Heading>
+      <Heading>{label}</Heading>
       <Carousel responsive={responsive} infinite={true} centerMode={true}>
         {data?.results.map(movie => <Image key={movie.id} src={getFullPosterPath(movie.poster_path)} p={1} borderRadius="8px"/>)}
       </Carousel>

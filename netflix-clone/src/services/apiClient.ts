@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: "https://api.themoviedb.org/3/",
+    baseURL: "https://api.themoviedb.org/3",
     params: {
         api_key: "5054016756784fdb1c14d5a803573027"
     }

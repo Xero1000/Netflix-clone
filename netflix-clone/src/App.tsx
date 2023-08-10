@@ -1,7 +1,7 @@
 import { Text } from "@chakra-ui/react"
 import NavBar from "./components/NavBar"
-import Slider from "./components/Slider"
 import useGenres from "./hooks/useGenres"
+import SliderContainer from "./components/SliderContainer"
 
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
     <>
         <NavBar />
         <Text>Billboard</Text>
-        <Slider />
+        <SliderContainer />
         <Text>Footer</Text>
     </>
   )
