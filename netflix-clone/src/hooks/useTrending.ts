@@ -4,7 +4,7 @@ import { FetchResponseMovies } from "../entities/FetchResponseMovies";
 
 const apiClient = new APIClient<FetchResponseMovies>("/trending/movie/week")
 
-const useTrending = () => useQuery({
+const useTrending = () => useQuery<FetchResponseMovies, Error>({
         queryKey: ["trending movies"],
         queryFn: () => apiClient.getAll()
     });

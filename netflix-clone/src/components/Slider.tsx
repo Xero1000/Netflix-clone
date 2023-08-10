@@ -1,11 +1,11 @@
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { Heading, Image, Spinner } from '@chakra-ui/react';
+import { Heading, Image, Spinner, Text } from '@chakra-ui/react';
 import getFullPosterPath from '../utilities/getFullPosterPath';
 import useTrending from "../hooks/useTrending";
 
 const Slider = () => {
-  const { data, isLoading } = useTrending()
+  const { data, isLoading, error } = useTrending()
 
   const responsive = {
     "2xl": {
@@ -36,6 +36,7 @@ const Slider = () => {
   };
 
   if (isLoading) return <Spinner />
+  if (error) return <Text>{error.message}</Text>
 
   return (
     <>
