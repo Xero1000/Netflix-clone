@@ -1,15 +1,15 @@
 import "react-multi-carousel/lib/styles.css";
 import { Spinner, Text } from "@chakra-ui/react";
-import useMovies from "../hooks/useMovies";
 import Slider from "./Slider";
+import useTv from "../hooks/useTv";
 
 interface Props {
   label: string;
   genreId?: number;
 }
 
-const MovieSlider = ({ label, genreId }: Props) => {
-  const { data, isLoading, error } = useMovies(label, genreId);
+const TvSlider = ({ label, genreId }: Props) => {
+  const { data, isLoading, error } = useTv(label, genreId);
 
   if (error) return <Text>{error.message}</Text>;
   if (isLoading) return <Spinner />;
@@ -20,4 +20,4 @@ const MovieSlider = ({ label, genreId }: Props) => {
   );
 };
 
-export default MovieSlider;
+export default TvSlider;
