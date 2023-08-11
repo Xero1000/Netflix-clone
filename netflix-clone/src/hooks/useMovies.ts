@@ -3,8 +3,8 @@ import { FetchResponseMovies } from "../entities/FetchResponseMovies"
 import APIClient from "../services/apiClient"
 
 
-const useMovies = (label: string, endpoint: string, genreId?: number) => {
-    const apiClient = new APIClient<FetchResponseMovies>(endpoint)
+const useMovies = (label: string, genreId?: number) => {
+    const apiClient = new APIClient<FetchResponseMovies>("/discover/movie")
 
     return useQuery<FetchResponseMovies, Error>({
         queryKey: [`${label} Movies`, genreId],

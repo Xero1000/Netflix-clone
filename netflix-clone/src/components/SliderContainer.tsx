@@ -8,8 +8,8 @@ const SliderContainer = () => {
     <>
       {data?.genres.map((genre) => (
         <Slider
+          key={genre.id}
           label={genre.name}
-          endpoint="/discover/movie"
           genreId={genre.id}
         />
       ))}
