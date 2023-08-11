@@ -1,7 +1,7 @@
 import useGenres from "../hooks/useGenres";
-import Slider from "./Slider";
+import Slider from "./MovieSlider";
 
-const SliderContainer = () => {
+const MovieSliderContainer = () => {
   const { data } = useGenres();
 
   return (
@@ -17,4 +17,4 @@ const SliderContainer = () => {
   );
 };
 
-export default SliderContainer;
+export default MovieSliderContainer;

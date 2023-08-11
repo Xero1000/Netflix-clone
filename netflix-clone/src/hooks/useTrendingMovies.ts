@@ -4,9 +4,9 @@ import { FetchResponseMovies } from "../entities/FetchResponseMovies";
 
 const apiClient = new APIClient<FetchResponseMovies>("/trending/movie/week")
 
-const useTrending = () => useQuery<FetchResponseMovies, Error>({
+const useTrendingMovies = () => useQuery<FetchResponseMovies, Error>({
         queryKey: ["trending movies"],
         queryFn: () => apiClient.getAll()
     });
 
-export default useTrending
+export default useTrendingMovies

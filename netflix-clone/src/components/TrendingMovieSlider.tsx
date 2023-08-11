@@ -2,15 +2,10 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Box, Heading, Image, Spinner, Text } from "@chakra-ui/react";
 import getFullPosterPath from "../utilities/getFullPosterPath";
-import useMovies from "../hooks/useMovies";
+import useTrendingMovies from "../hooks/useTrendingMovies";
 
-interface Props {
-  label: string;
-  genreId?: number;
-}
-
-const Slider = ({ label, genreId }: Props) => {
-  const { data, isLoading, error } = useMovies(label, genreId);
+const TrendingMovieSlider = () => {
+  const { data, isLoading, error } = useTrendingMovies()
 
   const responsive = {
     "2xl": {
@@ -46,7 +41,7 @@ const Slider = ({ label, genreId }: Props) => {
   return (
     <Box py={3}>
       <Heading fontSize="1.4vw" px={10} pb={1}>
-        {label}
+        Trending Movies
       </Heading>
       <Carousel responsive={responsive} infinite={true} centerMode={true}>
         {data?.results.map((movie) => (
@@ -62,4 +57,4 @@ const Slider = ({ label, genreId }: Props) => {
   );
 };
 
-export default Slider;
+export default TrendingMovieSlider;
