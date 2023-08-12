@@ -3,7 +3,3 @@ export interface Movie {
   title: string;
   backdrop_path: string;
 }
-
-export interface FetchResponseMovies {
-  results: Movie[];
-}

@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import APIClient from "../services/apiClient";
-import { FetchResponseMovies } from "../entities/FetchResponseMovies";
+import APIClient, { FetchResponseData } from "../services/apiClient";
+import { Movie } from "../entities/Movie";
 
-const apiClient = new APIClient<FetchResponseMovies>("/trending/movie/week")
+const apiClient = new APIClient<Movie>("/trending/movie/week")
 
-const useTrendingMovies = () => useQuery<FetchResponseMovies, Error>({
+const useTrendingMovies = () => useQuery<FetchResponseData<Movie>, Error>({
         queryKey: ["trending movies"],
         queryFn: () => apiClient.getAll()
     });

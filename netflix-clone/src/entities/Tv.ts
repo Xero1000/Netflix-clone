@@ -3,7 +3,3 @@ export interface Tv {
     name: string;
     backdrop_path: string;
   }
-  
-  export interface FetchResponseTv {
-    results: Tv[];
-  }

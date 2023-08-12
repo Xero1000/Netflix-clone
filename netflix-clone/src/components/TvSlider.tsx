@@ -16,7 +16,7 @@ const TvSlider = ({ label, genreId }: Props) => {
   if (data.results.length === 0) return null
 
   return (
-    <Slider label={label} data={data} />
+    <Slider label={label} data={data.results} />
   );
 };
 

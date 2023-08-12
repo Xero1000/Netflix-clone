@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
-import { FetchResponseTv } from "../entities/FetchResponseTv"
-import APIClient from "../services/apiClient"
+import { Tv } from "../entities/Tv"
+import APIClient, { FetchResponseData } from "../services/apiClient"
 
-const apiClient = new APIClient<FetchResponseTv>("/discover/tv")
+const apiClient = new APIClient<Tv>("/discover/tv")
 
-const useTv = (label: string, genreId?: number) => useQuery<FetchResponseTv, Error>({
+const useTv = (label: string, genreId?: number) => useQuery<FetchResponseData<Tv>, Error>({
     queryKey: [`${label} tv shows`, genreId],
     queryFn: () => apiClient.getAll({
         params: {

@@ -10,7 +10,7 @@ const TrendingTvSlider = () => {
   if (isLoading) return <Spinner />;
 
   return (
-    <Slider label="Trending TV Shows" data={data} />
+    <Slider label="Trending TV Shows" data={data.results} />
   );
 };
 
