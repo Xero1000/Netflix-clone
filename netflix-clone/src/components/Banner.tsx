@@ -41,7 +41,7 @@ const Banner = () => {
 
   return (
     <Box position="relative">
-      <Image src={getFullPosterPath(content?.backdrop_path)} />
+      <Image src={getFullPosterPath(content?.backdrop_path)} w="100%" />
       <Box position="absolute" top="40%" px={6}>
         <Heading pb={2} fontSize="4vw">
           {content.title}
