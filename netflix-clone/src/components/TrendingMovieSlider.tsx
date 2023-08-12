@@ -1,10 +1,11 @@
 import "react-multi-carousel/lib/styles.css";
 import { Spinner, Text } from "@chakra-ui/react";
-import useTrendingMovies from "../hooks/useTrendingMovies";
 import Slider from "./Slider";
+import useTrending from "../hooks/useTrending";
+import { Movie } from "../entities/Movie";
 
 const TrendingMovieSlider = () => {
-  const { data, isLoading, error } = useTrendingMovies()
+  const { data, isLoading, error } = useTrending<Movie>("movie")
 
   if (error) return <Text>{error.message}</Text>;
   if (isLoading) return <Spinner />;
