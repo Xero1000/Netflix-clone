@@ -3,6 +3,7 @@ import Carousel from "react-multi-carousel";
 import getFullPosterPath from "../utilities/getFullPosterPath";
 import { Movie } from "../entities/Movie";
 import { Tv } from "../entities/Tv";
+import LazyLoad from 'react-lazy-load';
 
 interface Props {
   label: string;
@@ -43,16 +44,23 @@ const Slider = ({ label, data }: Props) => {
       <Heading fontSize="1.4vw" px={10} pb={1}>
         {label}
       </Heading>
-      <Carousel responsive={responsive} infinite={true} centerMode={true}>
-        {data?.map((movie) => (
-          <Image
-            key={movie.id}
-            src={getFullPosterPath(movie.backdrop_path)}
-            p={1}
-            borderRadius="8px"
-          />
-        ))}
-      </Carousel>
+      <LazyLoad offset={100}>
+        <Carousel
+          responsive={responsive}
+          infinite={true}
+          centerMode={true}
+          draggable={false}
+          >
+          {data?.map((movie) => (
+            <Image
+              key={movie.id}
+              src={getFullPosterPath(movie.backdrop_path, "300")}
+              p={1}
+              borderRadius="8px"
+              />
+          ))}
+        </Carousel>
+      </LazyLoad>
     </Box>
   );
 };

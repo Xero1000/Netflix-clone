@@ -1,7 +1,7 @@
 
-const POSTER_SIZE = "w300"
-
-const getFullPosterPath = (posterPath: string) => {
+const getFullPosterPath = (posterPath: string, posterSize?: string) => {
+    if (posterSize) return `https://image.tmdb.org/t/p/w${posterSize}${posterPath}`
+    
     return `https://image.tmdb.org/t/p/original${posterPath}`
 } 
 

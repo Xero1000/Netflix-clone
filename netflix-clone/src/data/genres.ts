@@ -92,10 +92,6 @@ export default [
       "name": "Thriller"
     },
     {
-      "id": 10770,
-      "name": "TV Movie"
-    },
-    {
       "id": 10752,
       "name": "War"
     },

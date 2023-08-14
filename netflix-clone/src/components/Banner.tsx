@@ -7,7 +7,7 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { All } from "../entities/all";
+import { All } from "../entities/All"
 import useTrending from "../hooks/useTrending";
 import getFirstMovieOrTv from "../utilities/getFirstMovieOrTv";
 import getFullPosterPath from "../utilities/getFullPosterPath";
