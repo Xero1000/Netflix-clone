@@ -5,6 +5,7 @@ import { Movie } from "../entities/Movie";
 import { Tv } from "../entities/Tv";
 import LazyLoad from "react-lazy-load";
 import { useEffect, useState } from "react";
+import HoverCard from "./HoverCard";
 
 interface Props {
   label: string;
@@ -56,11 +57,7 @@ const Slider = ({ label, data }: Props) => {
         >
           {data?.map((movie) => (
             <LazyLoad key={movie.id}>
-              <Image
-                src={getFullPosterPath(movie.backdrop_path, "300")}
-                p={1}
-                borderRadius="8px"
-              />
+              <HoverCard content={movie}/>
             </LazyLoad>
           ))}
         </Carousel>

@@ -1,4 +1,3 @@
-import "react-multi-carousel/lib/styles.css";
 import { Spinner, Text } from "@chakra-ui/react";
 import useMovies from "../hooks/useMovies";
 import Slider from "./Slider";

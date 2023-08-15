@@ -1,4 +1,3 @@
-import "react-multi-carousel/lib/styles.css";
 import { Spinner, Text } from "@chakra-ui/react";
 import Slider from "./Slider";
 import useTv from "../hooks/useTv";
@@ -13,11 +12,9 @@ const TvSlider = ({ label, genreId }: Props) => {
 
   if (error) return <Text>{error.message}</Text>;
   if (isLoading) return <Spinner />;
-  if (data.results.length === 0) return null
+  if (data.results.length === 0) return null;
 
-  return (
-    <Slider label={label} data={data.results} />
-  );
+  return <Slider label={label} data={data.results} />;
 };
 
 export default TvSlider;
