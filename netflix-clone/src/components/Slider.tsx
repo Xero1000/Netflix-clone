@@ -1,6 +1,5 @@
-import { Box, Heading, Image } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import Carousel from "nuka-carousel";
-import getFullPosterPath from "../utilities/getFullPosterPath";
 import { Movie } from "../entities/Movie";
 import { Tv } from "../entities/Tv";
 import LazyLoad from "react-lazy-load";
