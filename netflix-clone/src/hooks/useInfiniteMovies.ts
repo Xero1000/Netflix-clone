@@ -16,7 +16,8 @@ const useInfiniteMovies = (genreId?: number) => {
         }),
         getNextPageParam: (lastPage, allPages) => {
             return lastPage.page < lastPage.total_pages ? allPages.length + 1 : undefined
-        }
+        },
+        staleTime: 24 * 60 * 60 * 1000, // 24 hr
     })
 }
 

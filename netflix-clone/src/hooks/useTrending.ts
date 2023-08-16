@@ -13,8 +13,8 @@ const useTrending = <T>(contentType: "all" | "movie" | "tv") => {
 
     return useQuery<FetchResponseData<T>, Error>({
         queryKey: [contentKeyMap[contentType]],
-        queryFn: () => apiClient.getAll()
-
+        queryFn: () => apiClient.getAll(),
+        staleTime: 24 * 60 * 60 * 1000, // 24 hr
     })
 }
 

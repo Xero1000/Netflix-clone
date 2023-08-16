@@ -10,7 +10,8 @@ const useTv = (label: string, genreId?: number) => useQuery<FetchResponseData<Tv
         params: {
             with_genres: genreId
         }
-    })
+    }),
+    staleTime: 24 * 60 * 60 * 1000, // 24 hr
 })
 
 export default useTv

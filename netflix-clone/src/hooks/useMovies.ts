@@ -12,7 +12,8 @@ const useMovies = (label: string, genreId?: number) => {
             params: {
                 with_genres: genreId,
             }
-        })
+        }),
+        staleTime: 24 * 60 * 60 * 1000, // 24 hr
     })
 }
 
