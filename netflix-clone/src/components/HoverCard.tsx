@@ -32,7 +32,7 @@ const HoverCard = ({ content }: Props) => {
       >
         <Image
           src={getFullPosterPath(content.backdrop_path, "500")}
-          borderRadius="8px"
+          borderRadius="2px"
         />
         {hovered && 
           <CardBody>

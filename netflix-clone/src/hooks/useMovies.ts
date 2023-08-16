@@ -7,7 +7,7 @@ const useMovies = (label: string, genreId?: number) => {
     const apiClient = new APIClient<Movie>("/discover/movie")
 
     return useQuery<FetchResponseData<Movie>, Error>({
-        queryKey: [`${label}`],
+        queryKey: [`${label} Movies`],
         queryFn: () => apiClient.getAll({
             params: {
                 with_genres: genreId,

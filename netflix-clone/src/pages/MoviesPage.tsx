@@ -1,7 +1,11 @@
+import MovieGrid from "../components/MovieGrid"
 
 const MoviesPage = () => {
+
   return (
-    <div>MoviesPage</div>
+    <>
+      <MovieGrid />
+    </>
   )
 }
 

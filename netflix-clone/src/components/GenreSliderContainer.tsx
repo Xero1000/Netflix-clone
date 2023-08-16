@@ -10,8 +10,8 @@ const GenreSliderContainer = () => {
     <>
       {data?.genres.map((genre) => (
         <Box key={genre.id}>
-          <MovieSlider label={genre.name + " Movies"} genreId={genre.id} />
-          <TvSlider label={genre.name + " TV Shows"} genreId={genre.id} />
+          <MovieSlider label={genre.name} genreId={genre.id} />
+          <TvSlider label={genre.name} genreId={genre.id} />
         </Box>
       ))}
     </>
