@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react"
-import MovieGenreDropdown from "../components/MovieGenreDropdown"
+import GenreDropdownList from "../components/GenreDropdownList"
 import ContentGrid from "../components/ContentGrid"
 import { useState } from "react"
 import { Genre } from "../entities/FetchResponseGenres"
@@ -10,7 +10,7 @@ const MoviesPage = () => {
 
   return (
     <Box paddingX={10}>
-      <MovieGenreDropdown selectedGenre={selectedGenre} onSelectGenre={(genre: Genre | undefined) => setSelectedGenre(genre)}/>
+      <GenreDropdownList genreType="movie" selectedGenre={selectedGenre} onSelectGenre={(genre: Genre | undefined) => setSelectedGenre(genre)}/>
       <ContentGrid type="movie" genreId={selectedGenre?.id}/>
     </Box>
   )

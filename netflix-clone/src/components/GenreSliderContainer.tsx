@@ -1,10 +1,10 @@
 import { Box } from "@chakra-ui/react";
-import useGenres from "../hooks/useGenres";
+import useAllGenres from "../hooks/useAllGenres";
 import MovieSlider from "./MovieSlider";
 import TvSlider from "./TvSlider";
 
 const GenreSliderContainer = () => {
-  const { data } = useGenres();
+  const { data } = useAllGenres();
 
   return (
     <>

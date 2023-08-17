@@ -1,9 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import genres from "../data/genres";
+import { useQuery } from "@tanstack/react-query"
+import { GenreAPIClient } from "../services/apiClient"
 
-const useGenres = () => useQuery({
-    queryKey:["genres"],
-    queryFn: () => ({ genres, isLoading: false, error: null})
+
+const apiClient = new GenreAPIClient()
+
+const useGenres = (type: "movie" | "tv") => useQuery({
+    queryKey: ["genres"],
+    queryFn: () => apiClient.getGenres(type)
 })
 
 export default useGenres
