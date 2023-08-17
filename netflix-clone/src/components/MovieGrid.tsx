@@ -1,7 +1,7 @@
 import { Box, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import HoverCard from "./HoverCard";
 import useInfiniteMovies from "../hooks/useInfiniteMovies";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 interface Props {
@@ -16,6 +16,17 @@ const MovieGrid = ({ genreId }: Props) => {
     fetchNextPage,
     hasNextPage,
   } = useInfiniteMovies(genreId);
+
+  const [initialPagesCount, setInitialPagesCount] = useState(0)
+
+  // To ensure the fetched movies fill the viewport, the first two pages worth of
+  // movies are loaded upon startup, but as the user scrolls down, only one page will
+  // be loaded at a time. 
+  useEffect(() => {
+    if (initialPagesCount < 2) {
+      fetchNextPage().then(() => setInitialPagesCount(initialPagesCount + 1))
+    }
+  }, [fetchNextPage, initialPagesCount])
 
   if (isLoading) return <Spinner />;
   if (error) return <Text>{error.message}</Text>;
