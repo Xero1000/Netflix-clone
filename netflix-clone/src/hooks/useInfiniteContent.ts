@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from "@tanstack/react-query"
+import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query"
 import APIClient, { FetchResponseData } from "../services/apiClient"
 import { Movie } from "../entities/Movie"
 import { Tv } from "../entities/Tv"
@@ -9,12 +9,17 @@ type ContentTypes = {
 }
 
 const useInfiniteContent = <T extends keyof ContentTypes>(type: T, genreId?: number) => {
-
     const endpoint = `/discover/${type}`
     const queryKeyValue = type === "movie" ? "Movies" : "TV Shows"
     const apiClient = new APIClient<ContentTypes[T]>(endpoint)
 
-    return useInfiniteQuery<FetchResponseData<ContentTypes[T]>, Error>({
+    const queryClient = useQueryClient(); 
+
+    const resetPagination = () => {
+        queryClient.removeQueries([queryKeyValue, genreId]);
+    };
+
+    const infiniteQueryResult = useInfiniteQuery<FetchResponseData<ContentTypes[T]>, Error>({
         queryKey: [queryKeyValue, genreId],
         queryFn: ({ pageParam = 1 }) => apiClient.getAll({
             params: {
@@ -27,6 +32,10 @@ const useInfiniteContent = <T extends keyof ContentTypes>(type: T, genreId?: num
         },
         staleTime: 24 * 60 * 60 * 1000, // 24 hr
     })
+
+    return {
+        ...infiniteQueryResult, resetPagination
+    }
 }
 
 export default useInfiniteContent
