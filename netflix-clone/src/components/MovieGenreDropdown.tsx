@@ -5,10 +5,11 @@ import { useState } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
 
 interface Props {
-  onSelectGenre: (genre: Genre) => void
+  selectedGenre?: Genre
+  onSelectGenre: (genre: Genre | undefined) => void
 }
 
-const MovieGenreDropdown = ({ onSelectGenre }: Props) => {
+const MovieGenreDropdown = ({ selectedGenre, onSelectGenre }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { data, error } = useMovieGenres();
@@ -43,7 +44,7 @@ const MovieGenreDropdown = ({ onSelectGenre }: Props) => {
 
   return (
     <Box display="flex" alignItems="center">
-      <Heading>Movies</Heading>
+      <Heading>{selectedGenre ? selectedGenre.name : "Movies"}</Heading>
       <Box paddingLeft={10}>
         <Box
           display="flex"
@@ -78,10 +79,10 @@ const MovieGenreDropdown = ({ onSelectGenre }: Props) => {
                 {column.map((genre, genreIndex) => (
                   <Button
                     key={genreIndex}
-                    onClick={() => onSelectGenre(genre)}
+                    onClick={() => onSelectGenre(genre.id === selectedGenre?.id ? undefined : genre)}
                     variant="link"
                     display="block"
-                    fontWeight="normal"
+                    fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
                     py={1}
                   >
                     {genre.name}

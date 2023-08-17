@@ -10,7 +10,7 @@ const MoviesPage = () => {
 
   return (
     <Box paddingX={10}>
-      <MovieGenreDropdown onSelectGenre={(genre: Genre) => setSelectedGenre(genre)}/>
+      <MovieGenreDropdown selectedGenre={selectedGenre} onSelectGenre={(genre: Genre | undefined) => setSelectedGenre(genre)}/>
       <MovieGrid genreId={selectedGenre?.id}/>
     </Box>
   )
