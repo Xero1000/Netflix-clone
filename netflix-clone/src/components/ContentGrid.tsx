@@ -1,21 +1,22 @@
 import { Box, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import HoverCard from "./HoverCard";
-import useInfiniteMovies from "../hooks/useInfiniteMovies";
+import useInfiniteContent from "../hooks/useInfiniteContent";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 interface Props {
+    type: "movie" | "tv"
     genreId?: number;
 }
 
-const MovieGrid = ({ genreId }: Props) => {
+const ContentGrid = ({ type, genreId }: Props) => {
   const {
     data,
     isLoading,
     error,
     fetchNextPage,
     hasNextPage,
-  } = useInfiniteMovies(genreId);
+  } = useInfiniteContent(type, genreId);
 
   const [initialPagesCount, setInitialPagesCount] = useState(0)
 
@@ -59,4 +60,4 @@ const MovieGrid = ({ genreId }: Props) => {
   );
 };
 
-export default MovieGrid;
+export default ContentGrid;
