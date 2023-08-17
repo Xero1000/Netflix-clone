@@ -1,11 +1,18 @@
+import { Box } from "@chakra-ui/react"
+import MovieGenreDropdown from "../components/MovieGenreDropdown"
 import MovieGrid from "../components/MovieGrid"
+import { useState } from "react"
+import { Genre } from "../entities/FetchResponseGenres"
 
 const MoviesPage = () => {
 
+  const [selectedGenre, setSelectedGenre] = useState<Genre>()
+
   return (
-    <>
-      <MovieGrid />
-    </>
+    <Box paddingX={10}>
+      <MovieGenreDropdown onSelectGenre={(genre: Genre) => setSelectedGenre(genre)}/>
+      <MovieGrid genreId={selectedGenre?.id}/>
+    </Box>
   )
 }
 

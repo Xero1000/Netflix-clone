@@ -4,14 +4,18 @@ import useInfiniteMovies from "../hooks/useInfiniteMovies";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const MovieGrid = () => {
+interface Props {
+    genreId?: number;
+}
+
+const MovieGrid = ({ genreId }: Props) => {
   const {
     data,
     isLoading,
     error,
     fetchNextPage,
     hasNextPage,
-  } = useInfiniteMovies();
+  } = useInfiniteMovies(genreId);
 
   if (isLoading) return <Spinner />;
   if (error) return <Text>{error.message}</Text>;
