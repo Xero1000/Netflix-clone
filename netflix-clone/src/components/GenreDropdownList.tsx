@@ -60,6 +60,7 @@ const GenreDropdownList = ({ genreType, selectedGenre, onSelectGenre }: Props) =
           borderColor="white"
           borderWidth={1}
           fontWeight="bold"
+          cursor="pointer"
         >
           Genres
           <Box paddingRight={2} paddingTop={1}>

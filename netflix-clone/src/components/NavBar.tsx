@@ -7,8 +7,6 @@ const NavBar = () => {
     "Home",
     "TV Shows",
     "Movies",
-    "New & Popular",
-    "Browse By Languages",
   ];
 
   return (
