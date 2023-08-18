@@ -8,7 +8,9 @@ const NavBar = () => {
   return (
     <HStack justifyContent="space-between" paddingX={10}>
       <HStack gap={5}>
-        <Image src={logo} boxSize="5em" />
+        <Link to="/">
+          <Image src={logo} boxSize="5em" />
+        </Link>
         <HStack fontSize="1vw" gap={5} whiteSpace="nowrap">
           <Link to="/">Home</Link>
           <Link to="/tvshows">TV Shows</Link>
