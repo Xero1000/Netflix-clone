@@ -4,6 +4,7 @@ import Homepage from "../pages/Homepage"
 import MoviesPage from "../pages/MoviesPage"
 import TvShowPage from "../pages/TvShowPage"
 import ErrorPage from "../pages/ErrorPage"
+import SearchResultPage from "../pages/SearchResultPage"
 
 const router = createBrowserRouter([
     {
@@ -13,7 +14,8 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <Homepage /> },
             { path: "movies", element: <MoviesPage />},
-            { path: "tvshows", element: <TvShowPage />}
+            { path: "tvshows", element: <TvShowPage />},
+            { path: "search/:searchText", element: <SearchResultPage />}
         ]
     }
 ])
