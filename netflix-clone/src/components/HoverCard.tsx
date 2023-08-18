@@ -16,7 +16,7 @@ const HoverCard = ({ content }: Props) => {
   // Movie or Tv
   const isMovie = (content: Movie  | Tv): content is Movie => {
     return (content as Movie).title !== undefined; 
-  } 
+  }
 
   return (
     <Box
@@ -34,11 +34,11 @@ const HoverCard = ({ content }: Props) => {
           src={getFullPosterPath(content.backdrop_path, "500")}
           borderRadius="2px"
         />
-        {/* {hovered && 
+        {hovered && 
           <CardBody>
             <Text>{isMovie(content) ? content.title : content.name}</Text>
           </CardBody>
-        } */}
+        }
       </Card>
     </Box>
   );
