@@ -1,8 +1,9 @@
-import { Box, Card, CardBody, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Card, CardBody, Image, Text } from "@chakra-ui/react";
 import { Movie } from "../entities/Movie";
 import { Tv } from "../entities/Tv";
 import getFullPosterPath from "../utilities/getFullPosterPath";
 import { useState } from "react";
+import { BsFillPlayFill } from "react-icons/bs";
 
 interface Props {
   content: Movie | Tv;
@@ -28,10 +29,9 @@ const HoverCard = ({ content }: Props) => {
     >
       <Card
         _hover={{
-          transform: "scale(1.03)",
+          transform: "scale(1.3)",
           transition: "transform .15s ease-in",
-          zIndex: 2,
-          // position: "absolute"
+          zIndex: 1,
         }}
         position="absolute"
       >
@@ -40,7 +40,10 @@ const HoverCard = ({ content }: Props) => {
           borderRadius="2px"
         />
         {hovered && 
-          <CardBody>
+          <CardBody pt={3}>
+            <Button size="xs" borderRadius="20px" padding={0} pl={0.5} bg="white" color="black">
+              <BsFillPlayFill size={18}/>
+            </Button>
             <Text>{isMovie(content) ? content.title : content.name}</Text>
           </CardBody>
         }

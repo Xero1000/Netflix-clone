@@ -34,6 +34,7 @@ const ContentGrid = ({ type, genreId, searchText }: Props) => {
       hasMore={!!hasNextPage}
       next={() => fetchNextPage()}
       loader={<Spinner />}
+      style={{ overflow: "visible" }}
     >
       <SimpleGrid columns={{ base: 2, sm: 3, md: 4, lg: 5 }}>
         {data.pages.map((page, index) => (

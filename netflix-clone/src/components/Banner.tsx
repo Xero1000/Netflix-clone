@@ -35,7 +35,6 @@ const Banner = () => {
   if (isLoading) return <Spinner />;
 
   const content = getFirstMovieOrTv(data.results);
-  console.log(content);
 
   if (!content) return null;
 
