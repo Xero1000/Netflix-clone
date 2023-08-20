@@ -30,7 +30,7 @@ const HoverCard = ({ content }: Props) => {
         _hover={{
           transform: "scale(1.03)",
           transition: "transform .15s ease-in",
-          zIndex: 1,
+          zIndex: 2,
           // position: "absolute"
         }}
         position="absolute"

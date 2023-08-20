@@ -42,7 +42,7 @@ const Slider = ({ label, data }: Props) => {
   }, []);
 
   return (
-    <Box py={3}>
+    <Box py={3} _hover={{zIndex: 1}} position="relative">
       <Heading fontSize="1.4vw" px={10} pb={1}>
         {label}
       </Heading>
@@ -53,6 +53,7 @@ const Slider = ({ label, data }: Props) => {
           wrapAround={true} // Enable infinite sliding
           dragging={false} // Disable dragging
           renderBottomCenterControls={null}
+          style={{overflow: "visible"}}
         >
           {data?.map((movie) => (
             <LazyLoad key={movie.id}>
