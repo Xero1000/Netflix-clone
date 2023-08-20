@@ -23,12 +23,17 @@ const HoverCard = ({ content }: Props) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       m={1}
+      position="relative"
+      h={{base: "18vw", sm: "12vw", lg: "10vw"}}
     >
       <Card
         _hover={{
           transform: "scale(1.03)",
           transition: "transform .15s ease-in",
+          zIndex: 1,
+          // position: "absolute"
         }}
+        position="absolute"
       >
         <Image
           src={getFullPosterPath(content.backdrop_path, "500")}
