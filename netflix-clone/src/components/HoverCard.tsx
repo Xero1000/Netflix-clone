@@ -3,12 +3,12 @@ import {
   Button,
   Card,
   CardBody,
+  HStack,
   Image,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Text,
@@ -19,6 +19,7 @@ import { Tv } from "../entities/Tv";
 import getFullPosterPath from "../utilities/getFullPosterPath";
 import { useState } from "react";
 import { BsFillPlayFill, BsChevronDown } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   content: Movie | Tv;
@@ -27,6 +28,11 @@ interface Props {
 const HoverCard = ({ content }: Props) => {
   const [hovered, setHovered] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
+
+  const handlePlay = (contentType: string, id: number) => {
+    navigate(`/trailer/${contentType}/${id}`);
+  };
 
   // Movie has unique property of title and Tv has unique property of name
   // Therefore, this function is needed to check if content is an instance of
@@ -35,6 +41,8 @@ const HoverCard = ({ content }: Props) => {
     return (content as Movie).title !== undefined;
   };
 
+  const contentType = isMovie(content) ? "movie" : "tv"
+
   return (
     <>
       <Box
@@ -42,7 +50,7 @@ const HoverCard = ({ content }: Props) => {
         onMouseLeave={() => setHovered(false)}
         m={1}
         position="relative"
-        h={{ base: "18vw", sm: "12vw", lg: "10vw" }}
+        h={{ base: "18vw", sm: "12vw", xl: "10vw" }}
       >
         <Card
           _hover={{
@@ -66,6 +74,7 @@ const HoverCard = ({ content }: Props) => {
                 bg="white"
                 color="black"
                 mr={1}
+                onClick={() => handlePlay(contentType, content.id)}
               >
                 <BsFillPlayFill size={18} />
               </Button>
@@ -89,23 +98,29 @@ const HoverCard = ({ content }: Props) => {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <Image
-            src={getFullPosterPath(content.backdrop_path)}
-            borderRadius="2px"
-          />
-          <ModalHeader>{isMovie(content) ? content.title : content.name}</ModalHeader>
+        <ModalContent maxW="40rem">
+          {/* Box is placeholder so that ModalBody content remains towards bottom while image is loading 
+              TMDB backdrop images have aspect ratio of 16x9 so pb is 56.25% */}
+          <Box width="100%" pb="56.25%" position="relative">
+            <Image
+              src={getFullPosterPath(content.backdrop_path)}
+              borderRadius="2px"
+              position="absolute"
+            />
+          </Box>
+          <ModalHeader>
+            {isMovie(content) ? content.title : content.name}
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text>{content.overview}</Text>
+            <HStack justifyContent="space-between">
+              <Button onClick={() => handlePlay(contentType, content.id)} bg="white" color="black" mb={5} h={8} pl={2.5}>
+                <BsFillPlayFill size={24} />
+                <Text pb={0.5}>Play</Text>
+              </Button>
+            </HStack>
+            <Text pb={5}>{content.overview}</Text>
           </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant="ghost">Secondary Action</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
