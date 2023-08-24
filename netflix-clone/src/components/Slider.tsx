@@ -12,6 +12,7 @@ interface Props {
 }
 
 const Slider = ({ label, data }: Props) => {
+
   // The number of slides to show depending on the size of
   // the browser window
   const getSlidesToShow = (width: number) => {
@@ -42,8 +43,8 @@ const Slider = ({ label, data }: Props) => {
   }, []);
 
   return (
-    <Box py={3} _hover={{zIndex: 1}} position="relative">
-      <Heading fontSize="1.4vw" px={10} pb={1}>
+    <Box py={3} _hover={{zIndex: 1}} position="relative" my={8}>
+      <Heading fontSize={{ base: "2.8vw", sm: "2.2vw", md: "1.6vw"}} px={10} pb={1}>
         {label}
       </Heading>
       <LazyLoad offset={100}>
