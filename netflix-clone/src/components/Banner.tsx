@@ -6,6 +6,7 @@ import {
   Spinner,
   Text,
   useBreakpointValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { All } from "../entities/All";
 import useTrending from "../hooks/useTrending";
@@ -16,6 +17,8 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 import isMovie from "../utilities/isMovie";
 import { Movie } from "../entities/Movie";
 import { Tv } from "../entities/Tv";
+import { useNavigate } from "react-router-dom";
+import ContentModal from "./ContentModal";
 
 const Banner = () => {
   const playIconSize = useBreakpointValue({ base: 24, xl: 48 });
@@ -33,6 +36,8 @@ const Banner = () => {
   };
 
   const { data, isLoading, error } = useTrending<All>("all");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate()
 
   if (error) return <Text>{error.message}</Text>;
   if (isLoading) return <Spinner />;
@@ -40,6 +45,12 @@ const Banner = () => {
   const content = getFirstMovieOrTv(data.results);
 
   if (!content) return null;
+
+  const contentType = isMovie(content) ? "movie" : "tv";
+
+  const handlePlay = (contentType: string, id: number) => {
+    navigate(`/trailer/${contentType}/${id}`);
+  };
 
   return (
     <Box position="relative">
@@ -54,11 +65,11 @@ const Banner = () => {
           </Text>
         </Box>
         <Box mt={3}>
-          <Button {...buttonStyles} bg="white" _hover={{bg: "gray.200"}} color="black" mr={2}>
+          <Button {...buttonStyles} bg="white" _hover={{bg: "gray.200"}} color="black" mr={2} onClick={() => handlePlay(contentType, content.id)}>
             <BsFillPlayFill size={playIconSize} />
             <Text {...textStyles}>Play</Text>
           </Button>
-          <Button {...buttonStyles} bg="rgba(109, 109, 110, 0.7)" _hover={{bg: "rgba(109, 109, 110, 0.6)"}} color="white">
+          <Button {...buttonStyles} bg="rgba(109, 109, 110, 0.7)" _hover={{bg: "rgba(109, 109, 110, 0.6)"}} color="white" onClick={onOpen}>
             <AiOutlineInfoCircle size={infoIconSize} />
             <Text px={{ base: 1, xl: 2 }} {...textStyles}>
               More Info
@@ -66,6 +77,8 @@ const Banner = () => {
           </Button>
         </Box>
       </Box>
+
+      <ContentModal isOpen={isOpen} onClose={onClose} content={content} contentType={contentType} handlePlay={handlePlay}/>
     </Box>
   );
 };
