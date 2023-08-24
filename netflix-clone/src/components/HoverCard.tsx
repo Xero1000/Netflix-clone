@@ -20,6 +20,7 @@ import getFullPosterPath from "../utilities/getFullPosterPath";
 import { useState } from "react";
 import { BsFillPlayFill, BsChevronDown } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import isMovie from "../utilities/isMovie";
 
 interface Props {
   content: Movie | Tv;
@@ -32,13 +33,6 @@ const HoverCard = ({ content }: Props) => {
 
   const handlePlay = (contentType: string, id: number) => {
     navigate(`/trailer/${contentType}/${id}`);
-  };
-
-  // Movie has unique property of title and Tv has unique property of name
-  // Therefore, this function is needed to check if content is an instance of
-  // Movie or Tv
-  const isMovie = (content: Movie | Tv): content is Movie => {
-    return (content as Movie).title !== undefined;
   };
 
   const contentType = isMovie(content) ? "movie" : "tv"
