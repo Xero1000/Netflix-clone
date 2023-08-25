@@ -15,6 +15,7 @@ import { Tv } from "../entities/Tv";
 import getFullPosterPath from "../utilities/getFullPosterPath";
 import isMovie from "../utilities/isMovie";
 import ContentModal from "./ContentModal";
+import BackdropPlaceholder from "./BackdropPlaceholder";
 
 interface Props {
   content: Movie | Tv;
@@ -46,12 +47,19 @@ const HoverCard = ({ content }: Props) => {
             transition: "transform .15s ease-in",
             zIndex: 1,
           }}
-          position="absolute"
         >
-          <Image
-            src={getFullPosterPath(content.backdrop_path, "500")}
-            borderRadius="2px"
-          />
+          <Box h={{ base: "20vw", sm: "15vw", md: "12vw", lg: "12vw", xl: "10vw" }}>
+            {content.backdrop_path ? (
+              <Image
+                src={getFullPosterPath(content.backdrop_path, "500")}
+                borderRadius="2px"
+                h="100%"
+                w="100%"
+              />
+            ) : (
+              <BackdropPlaceholder title={isMovie(content) ? content.title : content.name}/>
+            )}
+          </Box>
           {hovered && (
             <CardBody pt={3}>
               <Button

@@ -16,8 +16,7 @@ const Slider = ({ label, data }: Props) => {
   // The number of slides to show depending on the size of
   // the browser window
   const getSlidesToShow = (width: number) => {
-    if (width > 1399) return 6;
-    if (width > 1099) return 5;
+    if (width > 1399) return 5;
     if (width > 799) return 4;
     if (width > 499) return 3;
 
@@ -43,7 +42,7 @@ const Slider = ({ label, data }: Props) => {
   }, []);
 
   return (
-    <Box py={3} _hover={{zIndex: 1}} position="relative" my={8}>
+    <Box py={3} _hover={{zIndex: 1}} position="relative" my={8} px={10}>
       <Heading fontSize={{ base: "2.8vw", sm: "2.2vw", md: "1.6vw"}} px={10} pb={1}>
         {label}
       </Heading>
