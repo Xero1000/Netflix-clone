@@ -16,6 +16,7 @@ import getFullPosterPath from "../utilities/getFullPosterPath";
 import isMovie from "../utilities/isMovie";
 import ContentModal from "./ContentModal";
 import BackdropPlaceholder from "./BackdropPlaceholder";
+import backdropHeight from "../utilities/backdropHeight";
 
 interface Props {
   content: Movie | Tv;
@@ -39,7 +40,7 @@ const HoverCard = ({ content }: Props) => {
         onMouseLeave={() => setHovered(false)}
         m={1}
         position="relative"
-        h={{ base: "18vw", sm: "12vw", xl: "10vw" }}
+        h={backdropHeight}
       >
         <Card
           _hover={{
@@ -48,12 +49,12 @@ const HoverCard = ({ content }: Props) => {
             zIndex: 1,
           }}
         >
-          <Box h={{ base: "20vw", sm: "15vw", md: "12vw", lg: "12vw", xl: "10vw" }}>
+          <Box>
             {content.backdrop_path ? (
               <Image
                 src={getFullPosterPath(content.backdrop_path, "500")}
                 borderRadius="2px"
-                h="100%"
+                h={backdropHeight}
                 w="100%"
               />
             ) : (

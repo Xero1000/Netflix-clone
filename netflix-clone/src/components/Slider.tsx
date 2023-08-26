@@ -5,6 +5,7 @@ import { Tv } from "../entities/Tv";
 import LazyLoad from "react-lazy-load";
 import { useEffect, useState } from "react";
 import HoverCard from "./HoverCard";
+import SliderButton from "./SliderButton";
 
 interface Props {
   label: string;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const Slider = ({ label, data }: Props) => {
+  const [buttonHover, setButtonHover] = useState(false)
 
   // The number of slides to show depending on the size of
   // the browser window
@@ -42,8 +44,12 @@ const Slider = ({ label, data }: Props) => {
   }, []);
 
   return (
-    <Box py={3} _hover={{zIndex: 1}} position="relative" my={8} px={10}>
-      <Heading fontSize={{ base: "2.8vw", sm: "2.2vw", md: "1.6vw"}} px={10} pb={1}>
+    <Box py={3} _hover={{ zIndex: 1 }} position="relative" my={8} px={10}>
+      <Heading
+        fontSize={{ base: "2.8vw", sm: "2.2vw", md: "1.6vw" }}
+        px={10}
+        pb={1}
+      >
         {label}
       </Heading>
       <LazyLoad offset={100}>
@@ -53,11 +59,21 @@ const Slider = ({ label, data }: Props) => {
           wrapAround={true} // Enable infinite sliding
           dragging={false} // Disable dragging
           renderBottomCenterControls={null}
-          style={{overflow: "visible"}}
+          renderCenterLeftControls={({ previousSlide }) => (
+            <Box position="relative" left="-44px" onMouseEnter={() => setButtonHover(true)} onMouseLeave={() => setButtonHover(false)}>
+              <SliderButton direction="left" onClick={previousSlide} isVisible={buttonHover} />
+            </Box>
+          )}
+          renderCenterRightControls={({ nextSlide }) => (
+            <Box position="relative" right="-44px" onMouseEnter={() => setButtonHover(true)} onMouseLeave={() => setButtonHover(false)}>
+              <SliderButton direction="right" onClick={nextSlide} isVisible={buttonHover}/>
+            </Box>
+          )}
+          style={{ overflow: "visible" }}
         >
           {data?.map((movie) => (
             <LazyLoad key={movie.id}>
-              <HoverCard content={movie}/>
+              <HoverCard content={movie} />
             </LazyLoad>
           ))}
         </Carousel>

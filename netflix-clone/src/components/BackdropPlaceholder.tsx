@@ -1,4 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
+import backdropHeight from "../utilities/backdropHeight";
 
 interface Props {
   title: string;
@@ -7,7 +8,7 @@ interface Props {
 const BackdropPlaceholder = ({ title }: Props) => {
   return (
     <Box
-      h="100%"
+      h={backdropHeight}
       display="flex"
       justifyContent="center"
       alignItems="center"

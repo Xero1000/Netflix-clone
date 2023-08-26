@@ -40,11 +40,11 @@ const ContentModal = ({
         {/* Box is placeholder so that ModalBody content remains towards bottom while image is loading 
                 TMDB backdrop images have aspect ratio of 16x9 so pb is 56.25% */}
         <Box width="100%" pb="56.25%" position="relative">
-          <Image
+          {content.backdrop_path && <Image
             src={getFullPosterPath(content.backdrop_path)}
             borderRadius="2px"
             position="absolute"
-          />
+          />}
         </Box>
         <ModalHeader>
           {isMovie(content) ? content.title : content.name}
