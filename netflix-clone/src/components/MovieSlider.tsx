@@ -1,4 +1,4 @@
-import { Spinner, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import useMovies from "../hooks/useMovies";
 import Slider from "./Slider";
 
@@ -11,7 +11,7 @@ const MovieSlider = ({ label, genreId }: Props) => {
   const { data, isLoading, error } = useMovies(label, genreId);
 
   if (error) return <Text>{error.message}</Text>;
-  if (isLoading) return <Spinner />;
+  if (isLoading) return null;
   if (data.results.length === 0) return null
 
   return (

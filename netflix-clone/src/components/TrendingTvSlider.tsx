@@ -1,13 +1,13 @@
-import { Spinner, Text } from "@chakra-ui/react";
-import Slider from "./Slider";
-import useTrending from "../hooks/useTrending";
+import { Text } from "@chakra-ui/react";
 import { Tv } from "../entities/Tv";
+import useTrending from "../hooks/useTrending";
+import Slider from "./Slider";
 
 const TrendingTvSlider = () => {
   const { data, isLoading, error } = useTrending<Tv>("tv");
 
   if (error) return <Text>{error.message}</Text>;
-  if (isLoading) return <Spinner />;
+  if (isLoading) return null
 
   return <Slider label="Trending Tv Shows" data={data.results} />;
 };

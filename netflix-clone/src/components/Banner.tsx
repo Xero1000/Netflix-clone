@@ -3,21 +3,20 @@ import {
   Button,
   Heading,
   Image,
-  Spinner,
   Text,
   useBreakpointValue,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import { BsFillPlayFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 import { All } from "../entities/All";
+import { Movie } from "../entities/Movie";
+import { Tv } from "../entities/Tv";
 import useTrending from "../hooks/useTrending";
 import getFirstMovieOrTv from "../utilities/getFirstMovieOrTv";
 import getFullPosterPath from "../utilities/getFullPosterPath";
-import { BsFillPlayFill } from "react-icons/bs";
-import { AiOutlineInfoCircle } from "react-icons/ai";
 import isMovie from "../utilities/isMovie";
-import { Movie } from "../entities/Movie";
-import { Tv } from "../entities/Tv";
-import { useNavigate } from "react-router-dom";
 import ContentModal from "./ContentModal";
 
 const Banner = () => {
@@ -40,7 +39,7 @@ const Banner = () => {
   const navigate = useNavigate()
 
   if (error) return <Text>{error.message}</Text>;
-  if (isLoading) return <Spinner />;
+  if (isLoading) return null;
 
   const content = getFirstMovieOrTv(data.results);
 

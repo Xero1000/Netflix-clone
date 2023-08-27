@@ -1,19 +1,58 @@
-import { Box } from "@chakra-ui/react";
+import { Box, SimpleGrid } from "@chakra-ui/react";
+import { useIsFetching } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import useAllGenres from "../hooks/useAllGenres";
+import getSlidesToShow from "../utilities/getSlidesToShow";
+import CardContainer from "./CardContainer";
+import CardSkeleton from "./CardSkeleton";
 import MovieSlider from "./MovieSlider";
 import TvSlider from "./TvSlider";
 
 const GenreSliderContainer = () => {
   const { data } = useAllGenres();
 
+  const isFetching = useIsFetching()
+  
+  const [slidesToShow, setSlidesToShow] = useState(
+    getSlidesToShow(window.innerWidth)
+  );
+    
+    const skeletons = Array.from({ length: slidesToShow }, (_, i) => i + 1)
+    
+    // changes the number of slides displayed based on browser size
+    useEffect(() => {
+      const handleResize = () => {
+        setSlidesToShow(getSlidesToShow(window.innerWidth));
+      };
+      
+      window.addEventListener("resize", handleResize);
+
+      // Clean up by removing the event listener when the component unmounts
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, []);
+
   return (
     <>
-      {data?.genres.map((genre) => (
-        <Box key={genre.id}>
-          <MovieSlider label={genre.name} genreId={genre.id} />
-          <TvSlider label={genre.name} genreId={genre.id} />
+    {isFetching ? 
+        <SimpleGrid columns={slidesToShow} px={10}>
+        { skeletons.map(skeleton => 
+          <CardContainer key={skeleton}>
+            <CardSkeleton />
+          </CardContainer>)
+        }
+        </SimpleGrid>
+        : 
+        <Box>
+          {data?.genres.map((genre) => (
+            <Box key={genre.id}>
+              <MovieSlider label={genre.name} genreId={genre.id} />
+              <TvSlider label={genre.name} genreId={genre.id} />
+            </Box>
+          ))}
         </Box>
-      ))}
+      }
     </>
   );
 };

@@ -6,6 +6,7 @@ import LazyLoad from "react-lazy-load";
 import { useEffect, useState } from "react";
 import HoverCard from "./HoverCard";
 import SliderButton from "./SliderButton";
+import getSlidesToShow from "../utilities/getSlidesToShow";
 
 interface Props {
   label: string;
@@ -14,16 +15,6 @@ interface Props {
 
 const Slider = ({ label, data }: Props) => {
   const [buttonHover, setButtonHover] = useState(false)
-
-  // The number of slides to show depending on the size of
-  // the browser window
-  const getSlidesToShow = (width: number) => {
-    if (width > 1399) return 5;
-    if (width > 799) return 4;
-    if (width > 499) return 3;
-
-    return 2;
-  };
 
   const [slidesToShow, setSlidesToShow] = useState(
     getSlidesToShow(window.innerWidth)
@@ -73,7 +64,7 @@ const Slider = ({ label, data }: Props) => {
         >
           {data?.map((movie) => (
             <LazyLoad key={movie.id}>
-              <HoverCard content={movie} />
+                <HoverCard content={movie} />
             </LazyLoad>
           ))}
         </Carousel>

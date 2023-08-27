@@ -1,6 +1,6 @@
-import { Spinner, Text } from "@chakra-ui/react";
-import Slider from "./Slider";
+import { Text } from "@chakra-ui/react";
 import useTv from "../hooks/useTv";
+import Slider from "./Slider";
 
 interface Props {
   label: string;
@@ -11,7 +11,7 @@ const TvSlider = ({ label, genreId }: Props) => {
   const { data, isLoading, error } = useTv(label, genreId);
 
   if (error) return <Text>{error.message}</Text>;
-  if (isLoading) return <Spinner />;
+  if (isLoading) return null;
   if (data.results.length === 0) return null;
 
   return <Slider label={label} data={data.results} />;
