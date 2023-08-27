@@ -1,12 +1,12 @@
 import { Box, Heading } from "@chakra-ui/react";
 import Carousel from "nuka-carousel";
+import { useState } from "react";
+import LazyLoad from "react-lazy-load";
 import { Movie } from "../entities/Movie";
 import { Tv } from "../entities/Tv";
-import LazyLoad from "react-lazy-load";
-import { useEffect, useState } from "react";
+import useSlidesToShow from "../hooks/useSlidesToShow";
 import HoverCard from "./HoverCard";
 import SliderButton from "./SliderButton";
-import getSlidesToShow from "../utilities/getSlidesToShow";
 
 interface Props {
   label: string;
@@ -16,23 +16,7 @@ interface Props {
 const Slider = ({ label, data }: Props) => {
   const [buttonHover, setButtonHover] = useState(false)
 
-  const [slidesToShow, setSlidesToShow] = useState(
-    getSlidesToShow(window.innerWidth)
-  );
-
-  // changes the number of slides displayed based on browser size
-  useEffect(() => {
-    const handleResize = () => {
-      setSlidesToShow(getSlidesToShow(window.innerWidth));
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    // Clean up by removing the event listener when the component unmounts
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const slidesToShow = useSlidesToShow()
 
   return (
     <Box py={3} _hover={{ zIndex: 1 }} position="relative" my={8} px={10}>
