@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { FetchResponseGenres } from "../entities/FetchResponseGenres";
 
 export interface FetchResponseData<T> {
   results: T[];
@@ -24,15 +23,6 @@ class APIClient<T> {
   getAll = (config?: AxiosRequestConfig) => {
     return axiosInstance
       .get<FetchResponseData<T>>(this.endpoint, config)
-      .then(res => res.data)
-  }
-}
-
-export class GenreAPIClient {
-
-  getGenres = (contentType: string) => {
-    return axiosInstance
-      .get<FetchResponseGenres>(`/genre/${contentType}/list`)
       .then(res => res.data)
   }
 }

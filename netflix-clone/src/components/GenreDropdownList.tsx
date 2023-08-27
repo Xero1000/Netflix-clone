@@ -1,21 +1,25 @@
 import { Box, Button, Heading } from "@chakra-ui/react";
-import { Genre } from "../entities/FetchResponseGenres";
+import { Genre } from "../entities/Genre";
 import useGenres from "../hooks/useGenres";
 import { useState } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
 
 interface Props {
-  genreType: "movie" | "tv"
-  selectedGenre?: Genre
-  onSelectGenre: (genre: Genre | undefined) => void
+  genreType: "movie" | "tv";
+  selectedGenre?: Genre;
+  onSelectGenre: (genre: Genre | undefined) => void;
 }
 
-const GenreDropdownList = ({ genreType, selectedGenre, onSelectGenre }: Props) => {
+const GenreDropdownList = ({
+  genreType,
+  selectedGenre,
+  onSelectGenre,
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { data, error } = useGenres(genreType);
   const rows = 8;
-  const defaultHeading = genreType === "movie" ? "Movies" : "TV Shows"
+  const defaultHeading = genreType === "movie" ? "Movies" : "TV Shows";
 
   if (error || !data) return null;
 
@@ -82,10 +86,16 @@ const GenreDropdownList = ({ genreType, selectedGenre, onSelectGenre }: Props) =
                 {column.map((genre, genreIndex) => (
                   <Button
                     key={genreIndex}
-                    onClick={() => onSelectGenre(genre.id === selectedGenre?.id ? undefined : genre)}
+                    onClick={() =>
+                      onSelectGenre(
+                        genre.id === selectedGenre?.id ? undefined : genre
+                      )
+                    }
                     variant="link"
                     display="block"
-                    fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+                    fontWeight={
+                      genre.id === selectedGenre?.id ? "bold" : "normal"
+                    }
                     py={1}
                     textAlign="left"
                   >
