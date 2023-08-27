@@ -9,7 +9,7 @@ const TrendingTvSlider = () => {
   if (error) return <Text>{error.message}</Text>;
   if (isLoading) return null
 
-  return <Slider label="Trending Tv Shows" data={data.results} />;
+  return <Slider label="Trending" data={data.results} type="tv"/>;
 };
 
 export default TrendingTvSlider;

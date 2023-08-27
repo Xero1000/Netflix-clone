@@ -14,7 +14,7 @@ const TvSlider = ({ label, genreId }: Props) => {
   if (isLoading) return null;
   if (data.results.length === 0) return null;
 
-  return <Slider label={label} data={data.results} />;
+  return <Slider label={label} data={data.results} type="tv"/>;
 };
 
 export default TvSlider;

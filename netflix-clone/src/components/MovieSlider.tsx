@@ -15,7 +15,7 @@ const MovieSlider = ({ label, genreId }: Props) => {
   if (data.results.length === 0) return null
 
   return (
-    <Slider label={label} data={data.results} />
+    <Slider label={label} data={data.results} type="movie"/>
   );
 };
 

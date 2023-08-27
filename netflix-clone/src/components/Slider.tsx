@@ -11,9 +11,10 @@ import SliderButton from "./SliderButton";
 interface Props {
   label: string;
   data: Movie[] | Tv[];
+  type: "movie" | "tv";
 }
 
-const Slider = ({ label, data }: Props) => {
+const Slider = ({ label, data, type }: Props) => {
   const [buttonHover, setButtonHover] = useState(false)
 
   const slidesToShow = useSlidesToShow()
@@ -25,7 +26,7 @@ const Slider = ({ label, data }: Props) => {
         px={10}
         pb={1}
       >
-        {label}
+        {label + " " + (type === "movie" ? "Movies" : "Tv Shows")}
       </Heading>
       <LazyLoad offset={100}>
         <Carousel

@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import GenreDropdownList from "../components/GenreDropdownList";
 import ContentGrid from "../components/ContentGrid";
 import { useState } from "react";
-import { Genre } from "../entities/FetchResponseGenres";
+import { Genre } from "../entities/Genre";
 
 const MoviesPage = () => {
   const [selectedGenre, setSelectedGenre] = useState<Genre>();
