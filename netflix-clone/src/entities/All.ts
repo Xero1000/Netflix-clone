@@ -1,9 +1,5 @@
-export interface All {
-    id: number;
-    title: string;
-    backdrop_path: string;
-    media_type: string;
-    overview: string;
-    vote_average: number;
-    genre_ids: number[];
+
+// For fetching data on movies, tv shows, and people
+export interface All extends Base {
+  title: string;
 }
