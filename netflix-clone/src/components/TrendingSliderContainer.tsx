@@ -1,35 +1,31 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useIsFetching } from "@tanstack/react-query";
-import useSlidesToShow from "../hooks/useSlidesToShow";
-import CardContainer from "./CardContainer";
-import CardSkeleton from "./CardSkeleton";
+import useSlidesPerRow from "../hooks/useSlidesPerRow";
+import getRange from "../utilities/getRange";
+import PlaceholderContainer from "./PlaceholderContainer";
 import TrendingMovieSlider from "./TrendingMovieSlider";
 import TrendingTvSlider from "./TrendingTvSlider";
-import getRange from "../utilities/getRange";
 
 const TrendingSliderContainer = () => {
-  const isFetching = useIsFetching()
+  const isFetching = useIsFetching();
 
-  const slidesToShow = useSlidesToShow()
+  const slidesPerRow = useSlidesPerRow();
 
-  const skeletons = getRange(slidesToShow)
+  const skeletons = getRange(slidesPerRow);
 
   return (
     <>
-      {isFetching ? 
-        <SimpleGrid columns={slidesToShow} px={10}>
-        { skeletons.map(skeleton => 
-          <CardContainer key={skeleton}>
-            <CardSkeleton />
-          </CardContainer>)
-        }
-        </SimpleGrid>
-        : 
+      {isFetching ? (
+        <PlaceholderContainer
+          slidesPerRow={slidesPerRow}
+          skeletons={skeletons}
+        />
+      ) : (
         <Box>
           <TrendingMovieSlider />
           <TrendingTvSlider />
         </Box>
-      }
+      )}
     </>
   );
 };

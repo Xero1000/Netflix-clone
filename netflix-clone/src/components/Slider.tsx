@@ -4,7 +4,7 @@ import { useState } from "react";
 import LazyLoad from "react-lazy-load";
 import { Movie } from "../entities/Movie";
 import { Tv } from "../entities/Tv";
-import useSlidesToShow from "../hooks/useSlidesToShow";
+import useSlidesPerRow from "../hooks/useSlidesPerRow";
 import HoverCard from "./HoverCard";
 import SliderButton from "./SliderButton";
 
@@ -15,9 +15,9 @@ interface Props {
 }
 
 const Slider = ({ label, data, type }: Props) => {
-  const [buttonHover, setButtonHover] = useState(false)
+  const [buttonHover, setButtonHover] = useState(false);
 
-  const slidesToShow = useSlidesToShow()
+  const slidesPerRow = useSlidesPerRow();
 
   return (
     <Box py={3} _hover={{ zIndex: 1 }} position="relative" my={8} px={10}>
@@ -30,26 +30,44 @@ const Slider = ({ label, data, type }: Props) => {
       </Heading>
       <LazyLoad offset={100}>
         <Carousel
-          slidesToShow={slidesToShow} // Set the number of slides to show
-          slidesToScroll={slidesToShow} // Number of slides to scroll with each button click
+          slidesToShow={slidesPerRow} // Set the number of slides to show
+          slidesToScroll={slidesPerRow} // Number of slides to scroll with each button click
           style={{ overflow: "visible" }} // overflow doesn't work here without inline styling
           wrapAround={true} // Enable infinite sliding
-          dragging={false} 
+          dragging={false}
           renderBottomCenterControls={null}
           renderCenterLeftControls={({ previousSlide }) => (
-            <Box position="relative" left="-44px" onMouseEnter={() => setButtonHover(true)} onMouseLeave={() => setButtonHover(false)}>
-              <SliderButton direction="left" onClick={previousSlide} isVisible={buttonHover} />
+            <Box
+              position="relative"
+              left="-44px"
+              onMouseEnter={() => setButtonHover(true)}
+              onMouseLeave={() => setButtonHover(false)}
+            >
+              <SliderButton
+                direction="left"
+                onClick={previousSlide}
+                isVisible={buttonHover}
+              />
             </Box>
           )}
           renderCenterRightControls={({ nextSlide }) => (
-            <Box position="relative" right="-44px" onMouseEnter={() => setButtonHover(true)} onMouseLeave={() => setButtonHover(false)}>
-              <SliderButton direction="right" onClick={nextSlide} isVisible={buttonHover}/>
+            <Box
+              position="relative"
+              right="-44px"
+              onMouseEnter={() => setButtonHover(true)}
+              onMouseLeave={() => setButtonHover(false)}
+            >
+              <SliderButton
+                direction="right"
+                onClick={nextSlide}
+                isVisible={buttonHover}
+              />
             </Box>
           )}
         >
           {data?.map((movie) => (
             <LazyLoad key={movie.id}>
-                <HoverCard content={movie} />
+              <HoverCard content={movie} />
             </LazyLoad>
           ))}
         </Carousel>

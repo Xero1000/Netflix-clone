@@ -1,33 +1,29 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useIsFetching } from "@tanstack/react-query";
 import useAllGenres from "../hooks/useAllGenres";
-import useSlidesToShow from "../hooks/useSlidesToShow";
-import CardContainer from "./CardContainer";
-import CardSkeleton from "./CardSkeleton";
-import MovieSlider from "./MovieSlider";
-import TvSlider from "./TvSlider";
+import useSlidesPerRow from "../hooks/useSlidesPerRow";
 import getRange from "../utilities/getRange";
+import MovieSlider from "./MovieSlider";
+import PlaceholderContainer from "./PlaceholderContainer";
+import TvSlider from "./TvSlider";
 
 const GenreSliderContainer = () => {
   const { data } = useAllGenres();
 
-  const isFetching = useIsFetching()
-  
-  const slidesToShow = useSlidesToShow()
-    
-  const skeletons = getRange(slidesToShow)
+  const isFetching = useIsFetching();
+
+  const slidesPerRow = useSlidesPerRow();
+
+  const skeletons = getRange(slidesPerRow);
 
   return (
     <>
-    {isFetching ? 
-        <SimpleGrid columns={slidesToShow} px={10}>
-        { skeletons.map(skeleton => 
-          <CardContainer key={skeleton}>
-            <CardSkeleton />
-          </CardContainer>)
-        }
-        </SimpleGrid>
-        : 
+      {isFetching ? (
+        <PlaceholderContainer
+          slidesPerRow={slidesPerRow}
+          skeletons={skeletons}
+        />
+      ) : (
         <Box>
           {data?.genres.map((genre) => (
             <Box key={genre.id}>
@@ -36,7 +32,7 @@ const GenreSliderContainer = () => {
             </Box>
           ))}
         </Box>
-      }
+      )}
     </>
   );
 };

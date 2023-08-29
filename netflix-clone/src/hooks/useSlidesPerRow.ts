@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
-import getSlidesToShow from "../utilities/getSlidesToShow";
+import getSlidesPerRow from "../utilities/getSlidesPerRow";
 
-const useSlidesToShow = () => {
+const useSlidesPerRow = () => {
 
-    const [slidesToShow, setSlidesToShow] = useState(
-        getSlidesToShow(window.innerWidth)
+    const [slidesPerRow, setSlidesPerRow] = useState(
+        getSlidesPerRow(window.innerWidth)
     );
 
     // changes the number of slides displayed based on browser size
     useEffect(() => {
         const handleResize = () => {
-          setSlidesToShow(getSlidesToShow(window.innerWidth));
+          setSlidesPerRow(getSlidesPerRow(window.innerWidth));
         };
         
         window.addEventListener("resize", handleResize);
@@ -21,7 +21,7 @@ const useSlidesToShow = () => {
         };
     }, []);
 
-    return slidesToShow
+    return slidesPerRow
 }
 
-export default useSlidesToShow
+export default useSlidesPerRow
