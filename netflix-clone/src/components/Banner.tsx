@@ -18,6 +18,7 @@ import getFirstMovieOrTv from "../utilities/getFirstMovieOrTv";
 import getFullPosterPath from "../utilities/getFullPosterPath";
 import isMovie from "../utilities/isMovie";
 import ContentModal from "./ContentModal";
+import handlePlay from "../utilities/handlePlay";
 
 const Banner = () => {
   const playIconSize = useBreakpointValue({ base: 24, xl: 48 });
@@ -47,10 +48,6 @@ const Banner = () => {
 
   const contentType = isMovie(content) ? "movie" : "tv";
 
-  const handlePlay = (contentType: string, id: number) => {
-    navigate(`/trailer/${contentType}/${id}`);
-  };
-
   return (
     <Box position="relative">
       <Image src={getFullPosterPath(content?.backdrop_path)} w="100%" />
@@ -64,7 +61,7 @@ const Banner = () => {
           </Text>
         </Box>
         <Box mt={3}>
-          <Button {...buttonStyles} bg="white" _hover={{bg: "gray.200"}} color="black" mr={2} onClick={() => handlePlay(contentType, content.id)}>
+          <Button {...buttonStyles} bg="white" _hover={{bg: "gray.200"}} color="black" mr={2} onClick={() => handlePlay(contentType, content.id, navigate)}>
             <BsFillPlayFill size={playIconSize} />
             <Text {...textStyles}>Play</Text>
           </Button>
@@ -77,7 +74,7 @@ const Banner = () => {
         </Box>
       </Box>
 
-      <ContentModal isOpen={isOpen} onClose={onClose} content={content} contentType={contentType} handlePlay={handlePlay}/>
+      <ContentModal isOpen={isOpen} onClose={onClose} content={content} contentType={contentType}/>
     </Box>
   );
 };

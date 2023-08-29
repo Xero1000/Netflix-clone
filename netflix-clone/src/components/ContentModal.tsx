@@ -17,13 +17,14 @@ import { Tv } from "../entities/Tv";
 import getFullPosterPath from "../utilities/getFullPosterPath";
 import isMovie from "../utilities/isMovie";
 import styles from "../css-modules/backdrop.module.css"
+import handlePlay from "../utilities/handlePlay";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   content: Movie | Tv;
   contentType: "movie" | "tv";
-  handlePlay: (contentType: string, id: number) => void;
 }
 
 const ContentModal = ({
@@ -31,8 +32,9 @@ const ContentModal = ({
   onClose,
   content,
   contentType,
-  handlePlay,
 }: Props) => {
+
+  const navigate = useNavigate()
     
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -54,7 +56,7 @@ const ContentModal = ({
         <ModalBody>
           <HStack justifyContent="space-between">
             <Button
-              onClick={() => handlePlay(contentType, content.id)}
+              onClick={() => handlePlay(contentType, content.id, navigate)}
               bg="white"
               color="black"
               mb={5}

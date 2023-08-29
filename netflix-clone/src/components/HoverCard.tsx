@@ -18,6 +18,7 @@ import ContentModal from "./ContentModal";
 import BackdropPlaceholder from "./BackdropPlaceholder";
 import backdropHeight from "../utilities/backdropHeight";
 import styles from "../css-modules/backdrop.module.css"
+import handlePlay from "../utilities/handlePlay";
 
 interface Props {
   content: Movie | Tv;
@@ -27,10 +28,6 @@ const HoverCard = ({ content }: Props) => {
   const [hovered, setHovered] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-
-  const handlePlay = (contentType: string, id: number) => {
-    navigate(`/trailer/${contentType}/${id}`);
-  };
 
   const contentType = isMovie(content) ? "movie" : "tv";
 
@@ -72,7 +69,7 @@ const HoverCard = ({ content }: Props) => {
                 bg="white"
                 color="black"
                 mr={1}
-                onClick={() => handlePlay(contentType, content.id)}
+                onClick={() => handlePlay(contentType, content.id, navigate)}
               >
                 <BsFillPlayFill size={18} />
               </Button>
@@ -99,7 +96,6 @@ const HoverCard = ({ content }: Props) => {
         onClose={onClose}
         content={content}
         contentType={contentType}
-        handlePlay={handlePlay}
       />
     </>
   );
