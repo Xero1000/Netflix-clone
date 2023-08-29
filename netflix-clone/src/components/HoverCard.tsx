@@ -31,6 +31,12 @@ const HoverCard = ({ content }: Props) => {
 
   const contentType = isMovie(content) ? "movie" : "tv";
 
+  const sharedButtonStyles = {
+    size: "xs",
+    borderRadius: "20px",
+    p: 0,
+  }
+
   return (
     <>
       <Box
@@ -62,9 +68,7 @@ const HoverCard = ({ content }: Props) => {
           {hovered && (
             <CardBody pt={3}>
               <Button
-                size="xs"
-                borderRadius="20px"
-                padding={0}
+                {...sharedButtonStyles}
                 pl={0.5}
                 bg="white"
                 color="black"
@@ -74,11 +78,9 @@ const HoverCard = ({ content }: Props) => {
                 <BsFillPlayFill size={18} />
               </Button>
               <Button
-                size="xs"
-                borderRadius="20px"
+                {...sharedButtonStyles}
                 borderWidth={2}
                 borderColor="white"
-                padding={0}
                 bg="rgba(255, 255, 255, 0.1)"
                 color="white"
                 onClick={onOpen}

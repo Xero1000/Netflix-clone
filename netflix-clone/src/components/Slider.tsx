@@ -37,32 +37,20 @@ const Slider = ({ label, data, type }: Props) => {
           dragging={false}
           renderBottomCenterControls={null}
           renderCenterLeftControls={({ previousSlide }) => (
-            <Box
-              position="relative"
-              left="-44px"
-              onMouseEnter={() => setButtonHover(true)}
-              onMouseLeave={() => setButtonHover(false)}
-            >
-              <SliderButton
-                direction="left"
-                onClick={previousSlide}
-                isVisible={buttonHover}
-              />
-            </Box>
+            <SliderButton
+              direction="left" 
+              onClick={previousSlide}
+              isVisible={buttonHover}
+              setButtonHover={setButtonHover}
+            />
           )}
           renderCenterRightControls={({ nextSlide }) => (
-            <Box
-              position="relative"
-              right="-44px"
-              onMouseEnter={() => setButtonHover(true)}
-              onMouseLeave={() => setButtonHover(false)}
-            >
-              <SliderButton
-                direction="right"
-                onClick={nextSlide}
-                isVisible={buttonHover}
-              />
-            </Box>
+            <SliderButton
+              direction="right"
+              onClick={nextSlide}
+              isVisible={buttonHover}
+              setButtonHover={setButtonHover}
+            />
           )}
         >
           {data?.map((movie) => (
