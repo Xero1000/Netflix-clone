@@ -32,7 +32,7 @@ const ContentGrid = ({ type, genreId, searchText }: Props) => {
       hasMore={!!hasNextPage}
       next={() => fetchNextPage()}
       loader={null}
-      style={{ overflow: "visible" }}
+      style={{overflow: "visible"}} // overflow doesn't work here without inline styling
     >
       <SimpleGrid columns={{ base: 2, sm: 3, md: 4, xl: 5 }}>
         {isLoading && skeletons.map((skeleton) => 

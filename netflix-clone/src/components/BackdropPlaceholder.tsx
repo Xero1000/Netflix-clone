@@ -1,5 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import backdropHeight from "../utilities/backdropHeight";
+import styles from "../css-modules/backdrop.module.css"
 
 interface Props {
   title: string;
@@ -13,7 +14,7 @@ const BackdropPlaceholder = ({ title }: Props) => {
       justifyContent="center"
       alignItems="center"
       bg="gray.700"
-      borderRadius="2px"
+      className={styles.backdropBorderRadius}
     >
       <Text
         fontSize={{ base: "2.5vw", sm: "2vw", md: "1.5vw" }}

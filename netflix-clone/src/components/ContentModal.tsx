@@ -16,6 +16,7 @@ import { Movie } from "../entities/Movie";
 import { Tv } from "../entities/Tv";
 import getFullPosterPath from "../utilities/getFullPosterPath";
 import isMovie from "../utilities/isMovie";
+import styles from "../css-modules/backdrop.module.css"
 
 interface Props {
   isOpen: boolean;
@@ -41,8 +42,8 @@ const ContentModal = ({
                 TMDB backdrop images have aspect ratio of 16x9 so pb is 56.25% */}
         <Box width="100%" pb="56.25%" position="relative">
           {content.backdrop_path && <Image
+            className={styles.backdropBorderRadius}
             src={getFullPosterPath(content.backdrop_path)}
-            borderRadius="2px"
             position="absolute"
           />}
         </Box>

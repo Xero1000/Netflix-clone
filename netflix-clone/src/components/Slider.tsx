@@ -23,7 +23,7 @@ const Slider = ({ label, data, type }: Props) => {
     <Box py={3} _hover={{ zIndex: 1 }} position="relative" my={8} px={10}>
       <Heading
         fontSize={{ base: "2.8vw", sm: "2.2vw", md: "1.6vw" }}
-        px={10}
+        px={1}
         pb={1}
       >
         {label + " " + (type === "movie" ? "Movies" : "Tv Shows")}
@@ -32,8 +32,9 @@ const Slider = ({ label, data, type }: Props) => {
         <Carousel
           slidesToShow={slidesToShow} // Set the number of slides to show
           slidesToScroll={slidesToShow} // Number of slides to scroll with each button click
+          style={{ overflow: "visible" }} // overflow doesn't work here without inline styling
           wrapAround={true} // Enable infinite sliding
-          dragging={false} // Disable dragging
+          dragging={false} 
           renderBottomCenterControls={null}
           renderCenterLeftControls={({ previousSlide }) => (
             <Box position="relative" left="-44px" onMouseEnter={() => setButtonHover(true)} onMouseLeave={() => setButtonHover(false)}>
@@ -45,7 +46,6 @@ const Slider = ({ label, data, type }: Props) => {
               <SliderButton direction="right" onClick={nextSlide} isVisible={buttonHover}/>
             </Box>
           )}
-          style={{ overflow: "visible" }}
         >
           {data?.map((movie) => (
             <LazyLoad key={movie.id}>

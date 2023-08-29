@@ -17,6 +17,7 @@ import isMovie from "../utilities/isMovie";
 import ContentModal from "./ContentModal";
 import BackdropPlaceholder from "./BackdropPlaceholder";
 import backdropHeight from "../utilities/backdropHeight";
+import styles from "../css-modules/backdrop.module.css"
 
 interface Props {
   content: Movie | Tv;
@@ -52,8 +53,8 @@ const HoverCard = ({ content }: Props) => {
           <Box>
             {content.backdrop_path ? (
               <Image
+                className={styles.backdropBorderRadius}
                 src={getFullPosterPath(content.backdrop_path, "500")}
-                borderRadius="2px"
                 h={backdropHeight}
                 w="100%"
               />

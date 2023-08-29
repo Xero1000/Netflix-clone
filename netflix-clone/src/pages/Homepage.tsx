@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react"
 import Banner from "../components/Banner"
 import GenreSliderContainer from "../components/GenreSliderContainer"
 import TrendingSliderContainer from "../components/TrendingSliderContainer"
@@ -6,8 +7,10 @@ const Homepage = () => {
   return (
     <>
         <Banner />
-        <TrendingSliderContainer />
-        <GenreSliderContainer />
+        <Box overflow="hidden">
+          <TrendingSliderContainer />
+          <GenreSliderContainer />
+        </Box>
     </>
   )
 }

@@ -1,0 +1,8 @@
+/* 
+   border radius used by backdrop images, 
+   backdrop placeholders, and 
+   slider buttons 
+*/
+.backdropBorderRadius.backdropBorderRadius {
+    border-radius: 2px;
+}
