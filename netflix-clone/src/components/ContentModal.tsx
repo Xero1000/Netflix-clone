@@ -19,6 +19,7 @@ import isMovie from "../utilities/isMovie";
 import styles from "../css-modules/backdrop.module.css"
 import handlePlay from "../utilities/handlePlay";
 import { useNavigate } from "react-router-dom";
+import ModalGenreList from "./ModalGenreList";
 
 interface Props {
   isOpen: boolean;
@@ -66,6 +67,7 @@ const ContentModal = ({
               <BsFillPlayFill size={24} />
               <Text pb={0.5}>Play</Text>
             </Button>
+            <ModalGenreList genreIds={content.genre_ids}/>
           </HStack>
           <Text pb={5}>{content.overview}</Text>
         </ModalBody>

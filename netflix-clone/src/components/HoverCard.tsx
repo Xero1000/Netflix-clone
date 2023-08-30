@@ -10,15 +10,15 @@ import {
 import { useState } from "react";
 import { BsChevronDown, BsFillPlayFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import styles from "../css-modules/backdrop.module.css";
 import { Movie } from "../entities/Movie";
 import { Tv } from "../entities/Tv";
-import getFullPosterPath from "../utilities/getFullPosterPath";
-import isMovie from "../utilities/isMovie";
-import ContentModal from "./ContentModal";
-import BackdropPlaceholder from "./BackdropPlaceholder";
 import backdropHeight from "../utilities/backdropHeight";
-import styles from "../css-modules/backdrop.module.css"
+import getFullPosterPath from "../utilities/getFullPosterPath";
 import handlePlay from "../utilities/handlePlay";
+import isMovie from "../utilities/isMovie";
+import BackdropPlaceholder from "./BackdropPlaceholder";
+import ContentModal from "./ContentModal";
 
 interface Props {
   content: Movie | Tv;
@@ -29,13 +29,17 @@ const HoverCard = ({ content }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
-  const contentType = isMovie(content) ? "movie" : "tv";
+  const movie = isMovie(content);
+
+  const contentType = movie ? "movie" : "tv";
+
+  const contentTitle = movie ? content.title : content.name;
 
   const sharedButtonStyles = {
     size: "xs",
     borderRadius: "20px",
     p: 0,
-  }
+  };
 
   return (
     <>
@@ -62,7 +66,7 @@ const HoverCard = ({ content }: Props) => {
                 w="100%"
               />
             ) : (
-              <BackdropPlaceholder title={isMovie(content) ? content.title : content.name}/>
+              <BackdropPlaceholder title={contentTitle} />
             )}
           </Box>
           {hovered && (
@@ -87,7 +91,7 @@ const HoverCard = ({ content }: Props) => {
               >
                 <BsChevronDown />
               </Button>
-              <Text>{isMovie(content) ? content.title : content.name}</Text>
+              <Text>{contentTitle}</Text>
             </CardBody>
           )}
         </Card>
