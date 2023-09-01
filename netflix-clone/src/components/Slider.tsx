@@ -1,6 +1,6 @@
 import { Box, Heading } from "@chakra-ui/react";
 import Carousel from "nuka-carousel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LazyLoad from "react-lazy-load";
 import { Movie } from "../entities/Movie";
 import { Tv } from "../entities/Tv";
@@ -16,8 +16,50 @@ interface Props {
 
 const Slider = ({ label, data, type }: Props) => {
   const [buttonHover, setButtonHover] = useState(false);
-
+  const [currentSlide, setCurrentSlide] = useState(0); // State to maintain the current slide
   const slidesPerRow = useSlidesPerRow();
+  const [currentEndSlide, setCurrentEndSlide] = useState(currentSlide + slidesPerRow - 1)
+
+  const resetCurrentSlides = (direction?: "left" | "right") => {
+    let newCurrentSlide: number;
+    let newCurrentEndSlide: number;
+    let length = data.length;
+
+    if (direction === "left") {
+      newCurrentSlide = currentSlide - slidesPerRow;
+      if (newCurrentSlide < 0) {
+        newCurrentSlide = newCurrentSlide + length;
+      }
+      newCurrentEndSlide = newCurrentSlide + slidesPerRow - 1
+      if (newCurrentEndSlide >= length) {
+        newCurrentEndSlide = newCurrentEndSlide - length;
+      }
+      setCurrentSlide(newCurrentSlide);
+      setCurrentEndSlide(newCurrentEndSlide)
+    } else if (direction === "right") {
+      newCurrentSlide = currentSlide + slidesPerRow;
+      if (newCurrentSlide >= length) {
+        newCurrentSlide = newCurrentSlide - length;
+      }
+      newCurrentEndSlide = newCurrentSlide + slidesPerRow - 1
+      if (newCurrentEndSlide >= length) {
+        newCurrentEndSlide = newCurrentEndSlide - length;
+      }
+      setCurrentSlide(newCurrentSlide);
+      setCurrentEndSlide(newCurrentEndSlide)
+    }
+    else {
+      newCurrentEndSlide = currentSlide + slidesPerRow - 1
+      if (newCurrentEndSlide >= length) {
+        newCurrentEndSlide = newCurrentEndSlide - length;
+      }
+      setCurrentEndSlide(newCurrentEndSlide)
+    }
+  };
+
+  useEffect(() => {
+    resetCurrentSlides()
+  }, [slidesPerRow])
 
   return (
     <Box py={3} _hover={{ zIndex: 1 }} position="relative" my={8} px={10}>
@@ -38,8 +80,9 @@ const Slider = ({ label, data, type }: Props) => {
           renderBottomCenterControls={null}
           renderCenterLeftControls={({ previousSlide }) => (
             <SliderButton
-              direction="left" 
-              onClick={previousSlide}
+              direction="left"
+              slide={previousSlide}
+              setCurrentSlide={resetCurrentSlides}
               isVisible={buttonHover}
               setButtonHover={setButtonHover}
             />
@@ -47,15 +90,22 @@ const Slider = ({ label, data, type }: Props) => {
           renderCenterRightControls={({ nextSlide }) => (
             <SliderButton
               direction="right"
-              onClick={nextSlide}
+              slide={nextSlide}
+              setCurrentSlide={resetCurrentSlides}
               isVisible={buttonHover}
               setButtonHover={setButtonHover}
             />
           )}
         >
-          {data?.map((movie) => (
+          {data?.map((movie, index) => (
             <LazyLoad key={movie.id}>
-              <HoverCard content={movie} />
+              <HoverCard
+                content={movie}
+                index={index}
+                currentSlidesPerRow={slidesPerRow}
+                currentSliderStartIndex={currentSlide}
+                currentSliderEndIndex={currentEndSlide}
+              />
             </LazyLoad>
           ))}
         </Carousel>

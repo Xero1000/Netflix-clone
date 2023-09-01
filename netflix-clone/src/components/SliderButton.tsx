@@ -6,17 +6,24 @@ import styles from "../css-modules/backdrop.module.css";
 
 interface Props {
   direction: "left" | "right";
-  onClick: () => void;
+  slide: () => void;
+  setCurrentSlide: (direction: "left" | "right") => void;
   isVisible: boolean;
   setButtonHover: Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SliderButtonContainer = ({
   direction,
-  onClick,
+  slide,
+  setCurrentSlide,
   isVisible,
   setButtonHover,
 }: Props) => {
+  const handleClick = () => {
+    slide();
+    setCurrentSlide(direction);
+  };
+
   return (
     <Box
       {...(direction === "left" ? { left: "-44px" } : { right: "-44px" })}
@@ -25,7 +32,7 @@ const SliderButtonContainer = ({
       onMouseLeave={() => setButtonHover(false)}
     >
       <Button
-        onClick={onClick}
+        onClick={handleClick}
         cursor="pointer"
         h={backdropHeight}
         p={0}

@@ -19,22 +19,44 @@ import handlePlay from "../utilities/handlePlay";
 import isMovie from "../utilities/isMovie";
 import BackdropPlaceholder from "./BackdropPlaceholder";
 import ContentModal from "./ContentModal";
+import setScaleDirection from "../utilities/setScaleDirection";
 
 interface Props {
   content: Movie | Tv;
+  index: number;
+  currentSlidesPerRow: number;
+  currentSliderStartIndex?: number;
+  currentSliderEndIndex?: number;
 }
 
-const HoverCard = ({ content }: Props) => {
+const HoverCard = ({
+  content,
+  index,
+  currentSlidesPerRow,
+  currentSliderStartIndex,
+  currentSliderEndIndex,
+}: Props) => {
   const [hovered, setHovered] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-
+  if (index === 0) console.log(index, currentSliderStartIndex, currentSliderEndIndex)
   const movie = isMovie(content);
 
   const contentType = movie ? "movie" : "tv";
 
   const contentTitle = movie ? content.title : content.name;
 
+  const setSliderCardScaleDir = (start: number, end: number) => {
+    if (index === start) return "left";
+    else if (index === end) return "right";
+    else return "center";
+  };
+
+  const scaleDirection =
+    currentSliderStartIndex !== undefined && currentSliderEndIndex !== undefined
+      ? setSliderCardScaleDir(currentSliderStartIndex, currentSliderEndIndex)
+      : setScaleDirection(index, currentSlidesPerRow);  
+  
   const sharedButtonStyles = {
     size: "xs",
     borderRadius: "20px",
@@ -53,6 +75,7 @@ const HoverCard = ({ content }: Props) => {
         <Card
           _hover={{
             transform: "scale(1.3)",
+            transformOrigin: `center ${scaleDirection}`,
             transition: "transform .15s ease-in",
             zIndex: 1,
           }}

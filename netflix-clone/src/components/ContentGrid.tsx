@@ -49,9 +49,9 @@ const ContentGrid = ({ type, genreId, searchText }: Props) => {
             <React.Fragment key={index}>
               {page.results
                 .filter((movie) => movie.media_type !== "person")
-                .map((movie) => (
+                .map((movie, index) => (
                   <CardContainer key={movie.id}>
-                    <HoverCard content={movie} />
+                    <HoverCard content={movie} index={index} currentSlidesPerRow={slidesPerRow}/>
                   </CardContainer>
                 ))}
             </React.Fragment>

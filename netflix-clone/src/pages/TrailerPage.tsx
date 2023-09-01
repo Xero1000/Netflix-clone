@@ -19,9 +19,11 @@ const TrailerPage = () => {
   const trailer = getFirstTrailer(data?.results);
 
   return (
+    // autoplay in allow and src props enables it in different kinds of browsers
     <iframe
       className={styles.trailer}
       src={`https://www.youtube.com/embed/${trailer?.key}?autoplay=1`}
+      allow="autoplay"
       allowFullScreen
     ></iframe>
   );
