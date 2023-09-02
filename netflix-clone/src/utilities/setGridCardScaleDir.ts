@@ -1,5 +1,8 @@
 
-/*  Determines the direction cards will scale up in upon mouse hover
+/*  
+    Function used for cards that are children of ContentGrid
+    
+    Determines the direction cards will scale up in upon mouse hover
        Card on left edge of screen will scale up towards the right
        Card on right edge will scale up towards the left
        Every other card will scale up from the center
@@ -9,7 +12,7 @@
         Right most cards will equal 0
 */
 
-const setScaleDirection = (cardIndex: number, currentSlidesPerRow: number) => {
+const setGridCardScaleDir = (cardIndex: number, currentSlidesPerRow: number) => {
     const incrementedIndex = cardIndex + 1
     const directionVal = incrementedIndex % currentSlidesPerRow
 
@@ -23,4 +26,4 @@ const setScaleDirection = (cardIndex: number, currentSlidesPerRow: number) => {
     return "center"
 }
 
-export default setScaleDirection
+export default setGridCardScaleDir

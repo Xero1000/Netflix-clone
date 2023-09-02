@@ -7,6 +7,7 @@ import { Tv } from "../entities/Tv";
 import useSlidesPerRow from "../hooks/useSlidesPerRow";
 import HoverCard from "./HoverCard";
 import SliderButton from "./SliderButton";
+import setCurrentStartEndSlides from "../utilities/setCurrentStartEndSlides";
 
 interface Props {
   label: string;
@@ -15,50 +16,33 @@ interface Props {
 }
 
 const Slider = ({ label, data, type }: Props) => {
-  const [buttonHover, setButtonHover] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0); // State to maintain the current slide
+  // state for checking if mouse is hovering over slider buttons
+  const [buttonHover, setButtonHover] = useState(false); 
+
+  // State to track the current visible leftmost slide index
+  const [currentStartSlide, setCurrentStartSlide] = useState(0); 
+
+  // Get current number of visible slides inside slider
   const slidesPerRow = useSlidesPerRow();
-  const [currentEndSlide, setCurrentEndSlide] = useState(currentSlide + slidesPerRow - 1)
 
-  const resetCurrentSlides = (direction?: "left" | "right") => {
-    let newCurrentSlide: number;
-    let newCurrentEndSlide: number;
-    let length = data.length;
+  // State to track the current visible rightmost slide index
+  const [currentEndSlide, setCurrentEndSlide] = useState(currentStartSlide + slidesPerRow - 1)
 
-    if (direction === "left") {
-      newCurrentSlide = currentSlide - slidesPerRow;
-      if (newCurrentSlide < 0) {
-        newCurrentSlide = newCurrentSlide + length;
-      }
-      newCurrentEndSlide = newCurrentSlide + slidesPerRow - 1
-      if (newCurrentEndSlide >= length) {
-        newCurrentEndSlide = newCurrentEndSlide - length;
-      }
-      setCurrentSlide(newCurrentSlide);
-      setCurrentEndSlide(newCurrentEndSlide)
-    } else if (direction === "right") {
-      newCurrentSlide = currentSlide + slidesPerRow;
-      if (newCurrentSlide >= length) {
-        newCurrentSlide = newCurrentSlide - length;
-      }
-      newCurrentEndSlide = newCurrentSlide + slidesPerRow - 1
-      if (newCurrentEndSlide >= length) {
-        newCurrentEndSlide = newCurrentEndSlide - length;
-      }
-      setCurrentSlide(newCurrentSlide);
-      setCurrentEndSlide(newCurrentEndSlide)
-    }
-    else {
-      newCurrentEndSlide = currentSlide + slidesPerRow - 1
-      if (newCurrentEndSlide >= length) {
-        newCurrentEndSlide = newCurrentEndSlide - length;
-      }
-      setCurrentEndSlide(newCurrentEndSlide)
-    }
-  };
+  // setCurrentStartEndSlides is used multiple times in this component and has alot of parameters
+  // Therefore, handleSlideChange is used to prebind the common arguments so the only argument
+  // needed with each call is either the direction or nothing
+  const handleSlideChange = setCurrentStartEndSlides(
+    currentStartSlide,
+    setCurrentStartSlide,
+    setCurrentEndSlide,
+    slidesPerRow,
+    data.length
+  )
 
+  // set current start and end slides at startup and
+  // each time slidesPerRow changes
   useEffect(() => {
-    resetCurrentSlides()
+    handleSlideChange()
   }, [slidesPerRow])
 
   return (
@@ -82,7 +66,7 @@ const Slider = ({ label, data, type }: Props) => {
             <SliderButton
               direction="left"
               slide={previousSlide}
-              setCurrentSlide={resetCurrentSlides}
+              onSlideChange={() => handleSlideChange("left")}
               isVisible={buttonHover}
               setButtonHover={setButtonHover}
             />
@@ -91,7 +75,7 @@ const Slider = ({ label, data, type }: Props) => {
             <SliderButton
               direction="right"
               slide={nextSlide}
-              setCurrentSlide={resetCurrentSlides}
+              onSlideChange={() => handleSlideChange("right")}
               isVisible={buttonHover}
               setButtonHover={setButtonHover}
             />
@@ -103,7 +87,7 @@ const Slider = ({ label, data, type }: Props) => {
                 content={movie}
                 index={index}
                 currentSlidesPerRow={slidesPerRow}
-                currentSliderStartIndex={currentSlide}
+                currentSliderStartIndex={currentStartSlide}
                 currentSliderEndIndex={currentEndSlide}
               />
             </LazyLoad>

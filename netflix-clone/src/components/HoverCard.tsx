@@ -19,14 +19,15 @@ import handlePlay from "../utilities/handlePlay";
 import isMovie from "../utilities/isMovie";
 import BackdropPlaceholder from "./BackdropPlaceholder";
 import ContentModal from "./ContentModal";
-import setScaleDirection from "../utilities/setScaleDirection";
+import setGridCardScaleDir from "../utilities/setGridCardScaleDir";
+import setSliderCardScaleDir from "../utilities/setSliderCardScaleDir";
 
 interface Props {
   content: Movie | Tv;
   index: number;
   currentSlidesPerRow: number;
-  currentSliderStartIndex?: number;
-  currentSliderEndIndex?: number;
+  currentSliderStartIndex?: number; // index of current leftmost card visible in slider
+  currentSliderEndIndex?: number; // index of current rightmost card visible in slider
 }
 
 const HoverCard = ({
@@ -36,26 +37,23 @@ const HoverCard = ({
   currentSliderStartIndex,
   currentSliderEndIndex,
 }: Props) => {
+  
   const [hovered, setHovered] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-  if (index === 0) console.log(index, currentSliderStartIndex, currentSliderEndIndex)
+
   const movie = isMovie(content);
 
   const contentType = movie ? "movie" : "tv";
 
   const contentTitle = movie ? content.title : content.name;
 
-  const setSliderCardScaleDir = (start: number, end: number) => {
-    if (index === start) return "left";
-    else if (index === end) return "right";
-    else return "center";
-  };
-
+  // method of calculating scale direction depends on container the card comes from
+  // cards from a slider will have the optional props for current slider start and end indices
   const scaleDirection =
     currentSliderStartIndex !== undefined && currentSliderEndIndex !== undefined
-      ? setSliderCardScaleDir(currentSliderStartIndex, currentSliderEndIndex)
-      : setScaleDirection(index, currentSlidesPerRow);  
+      ? setSliderCardScaleDir(index, currentSliderStartIndex, currentSliderEndIndex)
+      : setGridCardScaleDir(index, currentSlidesPerRow);  
   
   const sharedButtonStyles = {
     size: "xs",

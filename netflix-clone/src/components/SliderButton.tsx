@@ -7,21 +7,22 @@ import styles from "../css-modules/backdrop.module.css";
 interface Props {
   direction: "left" | "right";
   slide: () => void;
-  setCurrentSlide: (direction: "left" | "right") => void;
+  onSlideChange: () => void;
   isVisible: boolean;
   setButtonHover: Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SliderButtonContainer = ({
+const SliderButton = ({
   direction,
   slide,
-  setCurrentSlide,
+  onSlideChange,
   isVisible,
   setButtonHover,
 }: Props) => {
+
   const handleClick = () => {
     slide();
-    setCurrentSlide(direction);
+    onSlideChange();
   };
 
   return (
@@ -49,4 +50,4 @@ const SliderButtonContainer = ({
   );
 };
 
-export default SliderButtonContainer;
+export default SliderButton;
