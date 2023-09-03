@@ -10,9 +10,9 @@ import {
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { BsFillPlayFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { All } from "../entities/All";
-import { Movie } from "../entities/Movie";
-import { Tv } from "../entities/Tv";
+import All from "../entities/All";
+import Movie from "../entities/Movie";
+import Tv from "../entities/Tv";
 import useTrending from "../hooks/useTrending";
 import getFirstMovieOrTv from "../utilities/getFirstMovieOrTv";
 import getFullPosterPath from "../utilities/getFullPosterPath";

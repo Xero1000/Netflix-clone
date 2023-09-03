@@ -1,5 +1,5 @@
 import { Text } from "@chakra-ui/react";
-import { Movie } from "../entities/Movie";
+import Movie from "../entities/Movie";
 import useTrending from "../hooks/useTrending";
 import Slider from "./Slider";
 

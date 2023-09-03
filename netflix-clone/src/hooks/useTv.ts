@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { Tv } from "../entities/Tv"
+import Tv from "../entities/Tv"
 import APIClient, { FetchResponseData } from "../services/apiClient"
 
 const apiClient = new APIClient<Tv>("/discover/tv")

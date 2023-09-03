@@ -1,4 +1,4 @@
-import { All } from "../entities/All";
+import All from "../entities/All";
 
 // Retrieve the first movie or tv show 
 const getFirstMovieOrTv = (data: All[]) => {

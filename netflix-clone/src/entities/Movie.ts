@@ -1,4 +1,4 @@
 
-export interface Movie extends Base {
+export default interface Movie extends Base {
   title: string;
 }

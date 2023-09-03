@@ -1,4 +1,4 @@
 
-export interface Tv extends Base{
+export default interface Tv extends Base{
   name: string;
 }

@@ -1,4 +1,4 @@
-export interface Video {
+export default interface Video {
     key: string;
     type: string;
 }

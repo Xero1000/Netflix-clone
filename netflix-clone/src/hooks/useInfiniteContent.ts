@@ -1,8 +1,8 @@
 import { useInfiniteQuery } from "@tanstack/react-query"
 import APIClient, { FetchResponseData } from "../services/apiClient"
-import { Movie } from "../entities/Movie"
-import { Tv } from "../entities/Tv"
-import { All } from "../entities/All"
+import Movie from "../entities/Movie"
+import Tv from "../entities/Tv"
+import All from "../entities/All"
 
 type ContentTypes = {
     movie: Movie

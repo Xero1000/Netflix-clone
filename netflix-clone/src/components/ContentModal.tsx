@@ -12,8 +12,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { BsFillPlayFill } from "react-icons/bs";
-import { Movie } from "../entities/Movie";
-import { Tv } from "../entities/Tv";
+import Movie from "../entities/Movie";
+import Tv from "../entities/Tv";
 import getFullPosterPath from "../utilities/getFullPosterPath";
 import isMovie from "../utilities/isMovie";
 import styles from "../css-modules/backdrop.module.css"

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { Movie } from "../entities/Movie"
+import Movie from "../entities/Movie"
 import APIClient, { FetchResponseData } from "../services/apiClient"
 
 const useMovies = (label: string, genreId?: number) => {

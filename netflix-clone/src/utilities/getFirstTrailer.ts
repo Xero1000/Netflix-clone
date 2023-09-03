@@ -1,4 +1,4 @@
-import { Video } from "../entities/Video";
+import Video from "../entities/Video";
 
 // Videos besides trailers are retrieved
 const getFirstTrailer = (data: Video[]) => {

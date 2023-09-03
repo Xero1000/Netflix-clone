@@ -1,5 +1,5 @@
 import { Box, Button, Heading } from "@chakra-ui/react";
-import { Genre } from "../entities/Genre";
+import Genre from "../entities/Genre";
 import useGenres from "../hooks/useGenres";
 import { useState } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
