@@ -10,6 +10,9 @@ interface Props {
   onSelectGenre: (genre: Genre | undefined) => void;
 }
 
+// The dropdown menu on MoviesPage and TvShowsPage that allows user to
+// filter by genre
+// User clicks genre to select it and clicks it again to unselect it
 const GenreDropdownList = ({
   genreType,
   selectedGenre,

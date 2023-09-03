@@ -14,15 +14,16 @@ interface Props {
   searchText?: string;
 }
 
+// Displayed on MoviesPage, TvShowPage, and SearchResultPage
+// Shows movies and tv shows in an infinitely scrolling grid
 const ContentGrid = ({ type, genreId, searchText }: Props) => {
+
   const { data, isLoading, error, fetchNextPage, hasNextPage } =
     useInfiniteContent(type, genreId, searchText);
 
   const slidesPerRow = useSlidesPerRow();
 
   const skeletons = getRange(slidesPerRow);
-
-  // const skeletons = [1, 2, 3, 4, 5];
 
   if (error) return <Text>{error.message}</Text>;
 

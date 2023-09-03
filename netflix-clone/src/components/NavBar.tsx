@@ -3,7 +3,7 @@ import logo from "../assets/netflix.png";
 import { Link } from "react-router-dom";
 import SearchInput from "./SearchInput";
 
-
+// The navigation bar at the top of the page
 const NavBar = () => {
 
   return (

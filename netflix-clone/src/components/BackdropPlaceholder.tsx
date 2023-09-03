@@ -6,6 +6,8 @@ interface Props {
   title: string;
 }
 
+// If a movie or tv show doesn't have a backdrop image, this component 
+// will be rendered instead.
 const BackdropPlaceholder = ({ title }: Props) => {
   return (
     <Box

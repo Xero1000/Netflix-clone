@@ -3,10 +3,13 @@ import { useRef } from "react";
 import { GoSearch } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 
+// Search box from the navigation bar
 const SearchInput = () => {
   const ref = useRef<HTMLInputElement>(null);
   const navigate = useNavigate()
 
+  // Pressing enter redirects user to SearchResultsPage which displays
+  // movies and tv shows based on user input
   return (
     <form
       onSubmit={(event) => {

@@ -30,6 +30,7 @@ interface Props {
   currentSliderEndIndex?: number; // index of current rightmost card visible in slider
 }
 
+// Card that represents each movie and tv show in Slider and ContentGrid
 const HoverCard = ({
   content,
   index,
@@ -55,12 +56,15 @@ const HoverCard = ({
       ? setSliderCardScaleDir(index, currentSliderStartIndex, currentSliderEndIndex)
       : setGridCardScaleDir(index, currentSlidesPerRow);  
   
+  // styles shared between play and info buttons
   const sharedButtonStyles = {
     size: "xs",
     borderRadius: "20px",
     p: 0,
   };
 
+  // By default only the backdrop image is shown
+  // On mouse hover, card expands and shows title, play button, and info button
   return (
     <>
       <Box
@@ -118,6 +122,7 @@ const HoverCard = ({
         </Card>
       </Box>
 
+      {/* Modal is opened when user clicks the info button */}
       <ContentModal
         isOpen={isOpen}
         onClose={onClose}

@@ -7,6 +7,7 @@ const Homepage = () => {
   return (
     <>
         <Banner />
+        {/* Without overflow hidden, entire slider is viewable all at once */}
         <Box overflow="hidden">
           <TrendingSliderContainer />
           <GenreSliderContainer />

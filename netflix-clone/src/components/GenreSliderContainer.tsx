@@ -7,6 +7,9 @@ import MovieSlider from "./MovieSlider";
 import PlaceholderContainer from "./PlaceholderContainer";
 import TvSlider from "./TvSlider";
 
+// Component that generates a slider of movies and tv shows for 
+// each genre on the HomePage
+// Uses the static allGenres data file and generates sliders for each genre
 const GenreSliderContainer = () => {
   const { data } = useAllGenres();
 

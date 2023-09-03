@@ -3,6 +3,7 @@ import { Movie } from "../entities/Movie";
 import useTrending from "../hooks/useTrending";
 import Slider from "./Slider";
 
+// Slider for trending movies 
 const TrendingMovieSlider = () => {
   const { data, isLoading, error } = useTrending<Movie>("movie");
 

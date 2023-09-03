@@ -7,6 +7,7 @@ interface Props {
   genreId?: number;
 }
 
+// Slider for showing tv shows 
 const TvSlider = ({ label, genreId }: Props) => {
   const { data, isLoading, error } = useTv(label, genreId);
 

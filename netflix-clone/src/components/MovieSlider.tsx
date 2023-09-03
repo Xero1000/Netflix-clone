@@ -7,6 +7,7 @@ interface Props {
   genreId?: number;
 }
 
+// Slider for displaying movies from a specific genre
 const MovieSlider = ({ label, genreId }: Props) => {
   const { data, isLoading, error } = useMovies(label, genreId);
 

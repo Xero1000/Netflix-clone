@@ -28,6 +28,8 @@ interface Props {
   contentType: "movie" | "tv";
 }
 
+// Modal that displays more information on a movie or tv show when the 
+// corresponding HoverCard's more info button is clicked
 const ContentModal = ({
   isOpen,
   onClose,

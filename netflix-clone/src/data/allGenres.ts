@@ -1,3 +1,4 @@
+// static data for all movie and tv show genres in alphabetical order
 export default [
     {
       "id": 28,

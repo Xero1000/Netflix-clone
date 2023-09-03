@@ -12,6 +12,8 @@ interface Props {
   setButtonHover: Dispatch<React.SetStateAction<boolean>>;
 }
 
+// The buttons for navigating to the left and right of a slider
+// Hovering over one button makes both of them visible
 const SliderButton = ({
   direction,
   slide,
@@ -20,6 +22,9 @@ const SliderButton = ({
   setButtonHover,
 }: Props) => {
 
+  // Clicking a button shifts slides and 
+  // performs recalculation to determine scale direction of each
+  // hover card
   const handleClick = () => {
     slide();
     onSlideChange();

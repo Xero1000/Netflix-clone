@@ -15,6 +15,7 @@ interface Props {
   type: "movie" | "tv";
 }
 
+// The base slider used by both MovieSlider and GenreSlider
 const Slider = ({ label, data, type }: Props) => {
   // state for checking if mouse is hovering over slider buttons
   const [buttonHover, setButtonHover] = useState(false); 

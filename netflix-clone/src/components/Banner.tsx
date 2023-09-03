@@ -20,10 +20,17 @@ import isMovie from "../utilities/isMovie";
 import ContentModal from "./ContentModal";
 import handlePlay from "../utilities/handlePlay";
 
+// First component at the top of the Homepage that displays the 
+// backdrop image and information for a single currently trending 
+// movie or tv show
 const Banner = () => {
+  
+  // breakpoints for the play and info buttons 
   const playIconSize = useBreakpointValue({ base: 24, xl: 48 });
   const infoIconSize = useBreakpointValue({ base: 18, xl: 36 });
 
+  // styles for the shared CSS properties between the play and
+  // info buttons
   const buttonStyles = {
     h: { base: "1.7rem", md: "2.4rem", xl: "3.1rem" },
     px: { base: "0.8rem", md: "1rem", xl: "1.2rem" },
@@ -31,6 +38,8 @@ const Banner = () => {
     fontWeight: "bold",
   };
 
+  // styles for the shared CSS properties between the play and 
+  // info buttons' text values 
   const textStyles = {
     pb: 0.5,
   };
@@ -42,11 +51,15 @@ const Banner = () => {
   if (error) return <Text>{error.message}</Text>;
   if (isLoading) return null;
 
+  // The first trending movie or tv show is the one displayed
   const content = getFirstMovieOrTv(data.results);
 
   if (!content) return null;
 
-  const contentType = isMovie(content) ? "movie" : "tv";
+  // check if the content is a movie or a tv show
+  const movie = isMovie(content)
+  
+  const contentType = movie ? "movie" : "tv";
 
   return (
     <Box position="relative">
@@ -54,7 +67,7 @@ const Banner = () => {
       <Box position="absolute" top="40%" px={6}>
         <Box textShadow="2px 2px 4px rgba(0,0,0,.45)">
           <Heading pb={2} fontSize="4vw">
-            {isMovie(content) ? (content as Movie).title : (content as Tv).name}
+            {movie ? (content as Movie).title : (content as Tv).name}
           </Heading>
           <Text fontSize="1.4vw" w="50%">
             {content.overview}
@@ -74,6 +87,7 @@ const Banner = () => {
         </Box>
       </Box>
 
+      {/* A modal is opened when user clicks More Info button */}
       <ContentModal isOpen={isOpen} onClose={onClose} content={content} contentType={contentType}/>
     </Box>
   );

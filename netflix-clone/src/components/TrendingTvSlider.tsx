@@ -3,6 +3,7 @@ import { Tv } from "../entities/Tv";
 import useTrending from "../hooks/useTrending";
 import Slider from "./Slider";
 
+// slider for showing trending tv shows
 const TrendingTvSlider = () => {
   const { data, isLoading, error } = useTrending<Tv>("tv");
 

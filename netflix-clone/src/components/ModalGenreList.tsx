@@ -5,6 +5,8 @@ interface Props {
   genreIds: number[];
 }
 
+// Displays the genres for the movie or tv show's inside its
+// corresponding ContentModal
 const ModalGenreList = ({ genreIds }: Props) => {
   const { data } = useAllGenres();
 

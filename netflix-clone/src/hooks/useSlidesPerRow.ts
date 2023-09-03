@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+// Gets the number of slides to display in grids and sliders 
+// based on the size of the browser window 
 const useSlidesPerRow = () => {
 
     // The number of slides to show depending on the size of

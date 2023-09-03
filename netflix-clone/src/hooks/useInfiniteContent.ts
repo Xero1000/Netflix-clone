@@ -10,6 +10,7 @@ type ContentTypes = {
     search: All
 }
 
+// Used for infinite scrolling for grids in MoviesPage, TvShowPage, and SearchResultsPage
 const useInfiniteContent = <T extends keyof ContentTypes>(type: T, genreId?: number, searchText?: string) => {
     const endpoint = searchText ? "/search/multi" : `/discover/${type}`
     let queryKeyValue: string
