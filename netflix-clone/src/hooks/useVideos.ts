@@ -7,8 +7,7 @@ const useVideos = (contentType: string, id: number) => {
 
     return useQuery<FetchResponseData<Video>, Error>({
         queryKey: ["videos", id],
-        queryFn: apiClient.getAll,
-        staleTime: 24 * 60 * 60 * 1000, // 24 hr
+        queryFn: apiClient.getAll
     })
 }
 
